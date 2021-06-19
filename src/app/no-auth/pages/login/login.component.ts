@@ -16,12 +16,37 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor(private authSvc: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
   }
 
   async onLogin() {
     const { email, password } = this.loginForm.value;
+    console.log(email, password);
+    
+    this.authService.login(email, password);
+  }
+
+  async onGoogleLogin() {
+    try {
+      const user = await this.authService.loginGoogle();
+      if (user) {
+        console.log('Funcionó Google!');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async onFacebookLogin() {
+    try {
+      const user = await this.authService.loginFacebook();
+      if (user) {
+        console.log('Funcionó Facebook!');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

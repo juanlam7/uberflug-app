@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "uberflug-app": {
+      "hosting": {
+        "uberflug-app": [
+          "uberflug-app"
+        ]
+      }
+    }
+  }
+}
