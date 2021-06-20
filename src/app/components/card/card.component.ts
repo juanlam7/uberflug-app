@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class CardComponent implements OnInit {
 
   @Input() item: any;
+  diffFav: boolean = false;
 
   constructor(private route: Router) { }
 
@@ -17,5 +18,10 @@ export class CardComponent implements OnInit {
 
   detalle(id: string) {
     this.route.navigate(['/auth/detail-hero', id]);
+  }
+
+  favoriteButton() {
+    this.diffFav === false ? this.diffFav = true : this.diffFav = false;
+    console.log('Works')
   }
 }

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
 import { CardComponent } from './card/card.component';
 
@@ -10,7 +13,9 @@ import { CardComponent } from './card/card.component';
     CardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [
     TopToolbarComponent,
