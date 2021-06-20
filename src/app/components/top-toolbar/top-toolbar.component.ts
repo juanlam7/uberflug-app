@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-top-toolbar',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopToolbarComponent implements OnInit {
 
-  constructor() { }
+  userData: any;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    this.authService.getCurrentUser().then(resp => {
+      this.userData = resp;
+    })
   }
-
 }

@@ -23,15 +23,24 @@ export class LoginComponent implements OnInit {
 
   async onLogin() {
     const { email, password } = this.loginForm.value;
-    console.log(email, password);
-    this.loginForm.reset();
+    try {
+      const user = await this.authService.login(email, password);
+      if (user) {
+        localStorage.setItem('Token', 'yet8retj')
+        this.router.navigate(['/auth'])
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async onGoogleLogin() {
     try {
       const user = await this.authService.loginGoogle();
       if (user) {
+        localStorage.setItem('Token', 'yet8retj')
         console.log('Funcionó Google!');
+        this.router.navigate(['/auth'])
       }
     } catch (error) {
       console.log(error);
@@ -42,7 +51,9 @@ export class LoginComponent implements OnInit {
     try {
       const user = await this.authService.loginFacebook();
       if (user) {
+        localStorage.setItem('Token', 'yet8retj')
         console.log('Funcionó Facebook!');
+        this.router.navigate(['/auth'])
       }
     } catch (error) {
       console.log(error);

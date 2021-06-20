@@ -3,6 +3,13 @@
         <img id="head" src="../../../assets/images/Subtraction.svg"/>
     </div>
     <div class="me-5">
-        <button class="btn btn-link">Menu  <img src="../../../assets/icons/burger menu.svg" class="icon_menu" alt="Bootstrap" width="20" height="20"></button>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-link">Menu  <img src="../../../assets/icons/burger menu.svg" class="icon_menu" alt="Bootstrap" width="20" height="20"></button>
+            </div>
+            <div class="col">
+                <p class="nav-link"> {{ userData?.email }}</p>
+            </div>
+        </div>
     </div>
 </nav>
