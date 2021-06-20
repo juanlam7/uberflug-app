@@ -6,6 +6,9 @@ import { ComponentsModule } from '../components/components.module';
 
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     NoAuthRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule
   ]
 })
 export class NoAuthModule { }
