@@ -15,7 +15,7 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /* detalle(id: string) {
-    this.route.navigate(['/detail', id]);
-  } */
+  detalle(id: string) {
+    this.route.navigate(['/auth/detail-hero', id]);
+  }
 }

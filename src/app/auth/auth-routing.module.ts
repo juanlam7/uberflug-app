@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       { path: 'heros-List', component: HerosListComponent },
       { path: 'fav-heros-List', component: FavHerosListComponent },
-      { path: 'detail-hero', component: DetailHeroComponent },
+      { path: 'detail-hero/:id', component: DetailHeroComponent },
       { path: '**', redirectTo: 'heros-List' }
     ]
   }
