@@ -2,6 +2,7 @@
     position: relative;
     color: black;
     opacity: 0.8;
+    border-radius: 15px;
 }
 
 .card:after{
@@ -32,7 +33,7 @@
     border-radius: 15px;
     min-width: 100%;
     min-height: 25em;
-    max-height: 35em;
+    max-height: 25em;
     object-fit: none;
 }
 

@@ -10,6 +10,8 @@ export class HerosListComponent implements OnInit {
 
   allCharacters: any;
   page!: number;
+  results: number = 12;
+  diffOrder: boolean = false;
 
   constructor(public charactersService: CharactersService) { }
 
@@ -17,9 +19,22 @@ export class HerosListComponent implements OnInit {
     this.charactersService.getAllCharacters().subscribe(resp => {
       this.allCharacters = resp.data.results;
       console.log(this.allCharacters);
+      localStorage.setItem('Characters',  JSON.stringify(this.allCharacters))
     }, (error) => {
       console.log(error);
     });
   }
 
+  changeOrder() {
+    this.diffOrder === false ? this.diffOrder = true : this.diffOrder = false;
+    this.allCharacters.sort(this.sortFunc);
+  }
+
+  sortFunc (a: any, b: any) {
+    return b === a ? 0 : b < a ? 1 : -1;
+  }
+
+  onPageChange(event?:any) {
+    event === 9 ? this.results = 4 : this.results = 12;
+  }
 }

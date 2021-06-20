@@ -1,8 +1,8 @@
 <div class="card">
-    <button *ngIf="!diffFav" (click)="favoriteButton()" class="fav_button" mat-fab color="rgba(255,255,255,1)" aria-label="Example icon button with a heart icon">
+    <button *ngIf="!diffFav" (click)="favoriteButton(item)" class="fav_button" mat-fab color="rgba(255,255,255,1)" aria-label="Example icon button with a heart icon">
         <mat-icon>favorite_border</mat-icon>
     </button>
-    <button *ngIf="diffFav" (click)="favoriteButton()" class="fav_button" mat-fab color="warn" aria-label="Example icon button with a heart icon">
+    <button *ngIf="diffFav" (click)="favoriteButton(item)" class="fav_button" mat-fab color="warn" aria-label="Example icon button with a heart icon">
         <mat-icon>favorite</mat-icon>
     </button>
     <div (click)="detalle(item.id)">
