@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CharactersService } from 'src/app/services/characters.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-
+import { ModalComponent } from './modal/modal.component'
 
 @Component({
   selector: 'app-detail-hero',
@@ -40,7 +42,11 @@ export class DetailHeroComponent implements OnInit {
   detail: any;
   detailComics: any;
 
-  constructor(private router: ActivatedRoute, private _route: Router, public charactersService: CharactersService) {}
+  constructor(private router: ActivatedRoute, 
+              private _route: Router, 
+              public charactersService: CharactersService,
+              private dialog: MatDialog,
+              private snack: MatSnackBar,) {}
 
   ngOnInit(): void {
     this.getDetailCharacter();
@@ -69,6 +75,22 @@ export class DetailHeroComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
+  }
+
+  openPopUp (data: any = []) {
+    const title = 'Heros'
+    const dialogRef: MatDialogRef<any> = this.dialog.open(ModalComponent, {
+        width: '1080px',
+        disableClose: true,
+        data: {title: title, payload: data}
+    })
+    dialogRef.afterClosed()
+        .subscribe(res => {
+            if (!res) {
+                return
+            }
+            console.log(res)
+        })
   }
 
 }
