@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CharactersService } from 'src/app/services/characters.service';
 
 @Component({
   selector: 'app-heros-list',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HerosListComponent implements OnInit {
 
-  constructor() { }
+  allCharacters: any;
+  page!: number;
+
+  constructor(public charactersService: CharactersService) { }
 
   ngOnInit(): void {
+    this.charactersService.getAllCharacters().subscribe(resp => {
+      this.allCharacters = resp.data.results;
+      console.log(this.allCharacters);
+    }, (error) => {
+      console.log(error);
+    });
   }
 
 }
