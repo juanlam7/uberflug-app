@@ -13,17 +13,21 @@
     <div class="row">
         <div class="col-12 align-items-center justify-content-center">
             <mat-list role="list">
-                <a [routerLink]="['/auth/fav-heros-List']" style="text-decoration: none;">
+                <a style="text-decoration: none;">
                     <mat-list-item role="listitem">
-                        <mat-icon matPrefix class="ms-2 me-3" color="warn">favorite</mat-icon>
-                        Personajes favoritos
+                        <button mat-icon-button (click)="changeView('fav')">
+                            <mat-icon matPrefix class="ms-2 me-3" color="warn">favorite</mat-icon>
+                            Personajes favoritos
+                        </button>
                     </mat-list-item>
                 </a>
                 <mat-divider></mat-divider>
-                <a [routerLink]="['/auth/heros-List']" style="text-decoration: none;">
+                <a style="text-decoration: none;">
                     <mat-list-item role="listitem">
-                        <mat-icon matPrefix class="ms-2 me-3">home</mat-icon>
-                        Lista de personajes
+                        <button mat-icon-button (click)="changeView('init')">
+                            <mat-icon matPrefix class="ms-2 me-3">home</mat-icon>
+                            Lista de personajes
+                        </button>
                     </mat-list-item>
                 </a>
                 <mat-divider></mat-divider>

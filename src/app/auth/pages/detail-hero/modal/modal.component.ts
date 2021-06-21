@@ -14,6 +14,6 @@ export class ModalComponent implements OnInit {
                 public dialogRef: MatDialogRef<ModalComponent>) { }
 
   ngOnInit() {
-    this.formatHourComic = moment(this.data.payload?.modified).format('LL');
+    this.formatHourComic = moment(this.data.payload?.dates[0].date).format('LL');
   }
 }

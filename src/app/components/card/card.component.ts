@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FavoritesService } from 'src/app/services/favorites.service';
 
 @Component({
   selector: 'app-card',
@@ -11,7 +12,7 @@ export class CardComponent implements OnInit {
   @Input() item: any;
   diffFav: boolean = false;
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private favoritesService: FavoritesService) { }
 
   ngOnInit(): void {
   }
@@ -22,20 +23,14 @@ export class CardComponent implements OnInit {
 
   favoriteButton(item: any) {
     this.diffFav === false ? this.diffFav = true : this.diffFav = false;
-    let exist = JSON.parse(localStorage.getItem('Favoritos')!);
-    if(exist === null) {
-      localStorage.setItem('Favoritos',  JSON.stringify([item]))
-    } else {
-      let check = exist.find((fav:any) => {
-        return fav.id === item.id
+    if (item.id_fire){
+      this.favoritesService.deleteFavorite(item.id_fire).then((value) => {
+        delete item.id_fire
       })
-      if(check){
-        let updatedExist = exist.filter((item:any) => item.id !== check.id);
-        localStorage.setItem('Favoritos',  JSON.stringify(updatedExist))
-      } else {
-        exist.push(item)
-        localStorage.setItem('Favoritos',  JSON.stringify(exist))
-      }
+    } else {
+      this.favoritesService.createFavorite(item).then((value) => {
+        item.id_fire = value.id
+      })
     }
   }
 }

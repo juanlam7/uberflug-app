@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CharactersService } from 'src/app/services/characters.service';
+import { FavoritesService } from 'src/app/services/favorites.service';
+import { WatchService } from 'src/app/services/watch.service';
 
 @Component({
   selector: 'app-heros-list',
@@ -15,17 +17,43 @@ export class HerosListComponent implements OnInit {
   results: number = 12;
   diffOrder: boolean = false;
 
-  constructor(public charactersService: CharactersService) { }
+  changeView: any;
+
+  constructor(public charactersService: CharactersService, private favoritesService: FavoritesService, private watchService: WatchService,) { }
 
   ngOnInit(): void {
-    this.charactersService.getAllCharacters().subscribe(resp => {
-      this.allCharacters = resp.data.results;
-      console.log(this.allCharacters);
-      localStorage.setItem('Characters',  JSON.stringify(this.allCharacters))
-      this.isLoading = true;
-    }, (error) => {
-      console.log(error);
-    });
+    this.watchService.watchFeedChange().subscribe((res) => {
+      this.changeView = res;
+      this.page = 1;
+      console.log(res)
+      this.charactersService.getAllCharacters().subscribe(resp => {
+        this.favoritesService.getFavorite().subscribe((value) => {
+          let favCharactes: any = []
+          for (let i = 0; i < value.length; i++) {
+            let characterIDFire = value[i].payload.doc.id;
+            let objCharacter:any = value[i].payload.doc.data();
+            
+            let objFavs = resp.data.results.filter((obj:any) => {
+              if (obj.id === objCharacter.id) { 
+                obj.id_fire = characterIDFire;
+                return obj
+               }
+            })
+            favCharactes.push(objFavs[0])
+          }
+          if (this.changeView === 'fav') {
+            this.allCharacters = favCharactes;
+          } else {
+            this.allCharacters = resp.data.results;
+          }
+        })
+        localStorage.setItem('Characters',  JSON.stringify(this.allCharacters))
+        this.isLoading = true;
+      }, (error) => {
+        console.log(error);
+      });
+    })
+    this.watchService.handlingViewChange === null ? this.changeView = this.watchService.anotherView('init') : this.changeView = 'fav';
   }
 
   changeOrder() {
