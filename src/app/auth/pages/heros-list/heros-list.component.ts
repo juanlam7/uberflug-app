@@ -25,7 +25,7 @@ export class HerosListComponent implements OnInit {
     this.watchService.watchFeedChange().subscribe((res) => {
       this.changeView = res;
       this.page = 1;
-      console.log(res);
+      //console.log(res);
       this.charactersService.getAllCharacters().subscribe(resp => {
         this.favoritesService.getFavorite().subscribe((value) => {
           let favCharactes: any = []
@@ -44,11 +44,11 @@ export class HerosListComponent implements OnInit {
           if (this.changeView === 'fav') {
             this.allCharacters = favCharactes;
             localStorage.setItem('CharactersFav',  JSON.stringify(this.allCharacters))
-            console.log(this.allCharacters)
+            //console.log(this.allCharacters)
           } else {
             this.allCharacters = resp.data.results;
             localStorage.setItem('Characters',  JSON.stringify(this.allCharacters))
-            console.log(this.allCharacters)
+            //console.log(this.allCharacters)
           }
         })
         this.isLoading = true;
