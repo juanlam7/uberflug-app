@@ -1,1 +1,28 @@
-<p>fav-heros-list works!</p>
+<app-top-toolbar></app-top-toolbar>
+<div class="container-fluid p-5">
+    <div *ngIf="allCharacters">
+        <div class="row">
+            <div class="col-12">
+                <p class="text-right" *ngIf="!diffOrder" (click)="changeOrder()"> {{results}} resultados <span class="ms-5"> a-z <img src="../../../../assets/icons/orden-listados.svg" alt="Bootstrap" width="10" height="10"></span> </p>
+                <p class="text-right" *ngIf="diffOrder" (click)="changeOrder()"> {{results}} resultados <span class="ms-5"> z-a <img src="../../../../assets/icons/orden-listados.svg" style="transform: rotate(180deg);" alt="Bootstrap" width="10" height="10"></span> </p>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-2 mt-2" *ngFor="let item of allCharacters | paginate: { itemsPerPage: 12, currentPage: page }">
+                <app-card [item]="item"></app-card>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+          <pagination-controls (pageChange)="page = $event" previousLabel="" nextLabel=""></pagination-controls>
+        </div>
+    </div>
+    <div *ngIf="!allCharacters">
+        <div class="col d-flex align-items-center justify-content-center" style="min-height: 550px;">
+            <div class="row">
+                <div class="text-center" >
+                    <p>No hay personajes favoritos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
