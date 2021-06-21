@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuModalComponent } from './menu-modal/menu-modal.component';
+import { WatchService } from 'src/app/services/watch.service';
 
 @Component({
   selector: 'app-top-toolbar',
@@ -16,6 +17,7 @@ export class TopToolbarComponent implements OnInit {
 
   constructor(private authService: AuthService, 
               private router: Router,
+              private watchService: WatchService,
               private dialog: MatDialog,
               private snack: MatSnackBar,) {}
 
@@ -23,6 +25,13 @@ export class TopToolbarComponent implements OnInit {
     this.authService.getCurrentUser().then(resp => {
       this.userData = resp;
     })
+  }
+
+  changeView(view:any) {
+    setTimeout(() => {
+      this.watchService.anotherView(view);
+    }, 100);
+    this.router.navigate(['/auth/hero-list']);
   }
 
   openPopUp (data: any = []) {

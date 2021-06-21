@@ -6,6 +6,7 @@ import { CharactersService } from 'src/app/services/characters.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ModalComponent } from './modal/modal.component';
 import * as moment from 'moment';
+import { FavoritesService } from 'src/app/services/favorites.service';
 
 @Component({
   selector: 'app-detail-hero',
@@ -50,6 +51,7 @@ export class DetailHeroComponent implements OnInit {
   constructor(private router: ActivatedRoute, 
               private _route: Router, 
               public charactersService: CharactersService,
+              public favoritesService: FavoritesService,
               private dialog: MatDialog,
               private snack: MatSnackBar,) {}
 
@@ -62,8 +64,14 @@ export class DetailHeroComponent implements OnInit {
     const id = this.router.snapshot.paramMap.get('id');
     
     await this.charactersService.getDetailCharacter(id).subscribe(resp => {
+      
+      let CharactersFav = JSON.parse(localStorage.getItem('CharactersFav')!);
+      CharactersFav.find((obj:any) => {
+          if (obj.id === resp.data.results[0].id) { resp.data.results[0].id_fire =obj.id_fire }
+      });
       this.detail = resp.data.results[0];
-      console.log(this.detail);
+      //console.log(this.detail);
+
       this.formatHour = moment(this.detail?.modified).format('LL');
       this.getComictsByCharacter(this.detail.comics.collectionURI);
     }, (error) => {
@@ -78,7 +86,6 @@ export class DetailHeroComponent implements OnInit {
     
     await this.charactersService.getComictsByCharacter(notHTTP).subscribe(resp => {
       this.detailComics = resp.data.results;
-      console.log(this.detailComics);
       this.isLoading = true;
     }, (error) => {
       console.log(error);
@@ -103,20 +110,14 @@ export class DetailHeroComponent implements OnInit {
 
   favoriteButton(item: any) {
     this.diffFav === false ? this.diffFav = true : this.diffFav = false;
-    let exist = JSON.parse(localStorage.getItem('Favoritos')!);
-    if(exist === null) {
-      localStorage.setItem('Favoritos',  JSON.stringify([item]))
-    } else {
-      let check = exist.find((fav:any) => {
-        return fav.id === item.id
+    if (item.id_fire){
+      this.favoritesService.deleteFavorite(item.id_fire).then((value) => {
+        delete item.id_fire
       })
-      if(check){
-        let updatedExist = exist.filter((item:any) => item.id !== check.id);
-        localStorage.setItem('Favoritos',  JSON.stringify(updatedExist))
-      } else {
-        exist.push(item)
-        localStorage.setItem('Favoritos',  JSON.stringify(exist))
-      }
+    } else {
+      this.favoritesService.createFavorite(item).then((value) => {
+        item.id_fire = value.id
+      })
     }
   }
 }

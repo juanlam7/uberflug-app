@@ -11,7 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 
 import { HerosListComponent } from './pages/heros-list/heros-list.component';
-import { FavHerosListComponent } from './pages/fav-heros-list/fav-heros-list.component';
 import { DetailHeroComponent } from './pages/detail-hero/detail-hero.component';
 import { ModalComponent } from './pages/detail-hero/modal/modal.component';
 
@@ -19,7 +18,6 @@ import { ModalComponent } from './pages/detail-hero/modal/modal.component';
 @NgModule({
   declarations: [
     HerosListComponent,
-    FavHerosListComponent,
     DetailHeroComponent,
     ModalComponent
   ],

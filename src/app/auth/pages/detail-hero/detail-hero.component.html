@@ -7,10 +7,10 @@
             </div>
             <div class="col-4">
                 <div class="card p-5 card_description">
-                    <button *ngIf="!diffFav" (click)="favoriteButton(detail)" class="fav_button" mat-fab color="rgba(255,255,255,1)" aria-label="heart icon">
+                    <button *ngIf="!detail.id_fire" (click)="favoriteButton(detail)" class="fav_button" mat-fab color="rgba(255,255,255,1)" aria-label="heart icon">
                         <mat-icon>favorite_border</mat-icon>
                     </button>
-                    <button *ngIf="diffFav" (click)="favoriteButton(detail)" class="fav_button" mat-fab color="warn" aria-label="Example icon button with a heart icon">
+                    <button *ngIf="detail.id_fire" (click)="favoriteButton(detail)" class="fav_button" mat-fab color="warn" aria-label="Example icon button with a heart icon">
                         <mat-icon>favorite</mat-icon>
                     </button>
                     <h1 class="text_img">{{ detail?.name }}</h1>

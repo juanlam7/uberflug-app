@@ -10,6 +10,8 @@ import { WatchService } from 'src/app/services/watch.service';
 })
 export class MenuModalComponent implements OnInit {
 
+  isLoading: boolean = true;
+
   formatHourComic: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,8 +24,13 @@ export class MenuModalComponent implements OnInit {
   }
 
   changeView(view:any) {
-    this.watchService.anotherView(view);
-    this.dialogRef.close();
+    this.isLoading = false;
+    setTimeout(() => {
+      this.watchService.anotherView(view);
+      this.isLoading = true;
+      this.dialogRef.close();
+    }, 100);
+    this.router.navigate(['/auth/hero-list']);
   }
 
   async logout() {
