@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-modal',
@@ -7,9 +8,12 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dial
 })
 export class ModalComponent implements OnInit {
 
+  formatHourComic: any;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                 public dialogRef: MatDialogRef<ModalComponent>) { }
 
   ngOnInit() {
+    this.formatHourComic = moment(this.data.payload?.modified).format('LL');
   }
 }

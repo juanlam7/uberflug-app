@@ -88,7 +88,7 @@ export class DetailHeroComponent implements OnInit {
     const dialogRef: MatDialogRef<any> = this.dialog.open(ModalComponent, {
         width: '1080px',
         disableClose: true,
-        data: {title: title, date: this.formatHour, payload: data}
+        data: {title: title, payload: data}
     })
     dialogRef.afterClosed()
         .subscribe(res => {

@@ -2,7 +2,7 @@
 <div class="container-fluid p-5">
     <div *ngIf="allCharacters">
         <div class="row">
-            <div class="col-12">
+            <div class="col-2">
                 <p class="text-right" *ngIf="!diffOrder" (click)="changeOrder()"> {{results}} resultados <span class="ms-5"> a-z <img src="../../../../assets/icons/orden-listados.svg" alt="Bootstrap" width="10" height="10"></span> </p>
                 <p class="text-right" *ngIf="diffOrder" (click)="changeOrder()"> {{results}} resultados <span class="ms-5"> z-a <img src="../../../../assets/icons/orden-listados.svg" style="transform: rotate(180deg);" alt="Bootstrap" width="10" height="10"></span> </p>
             </div>

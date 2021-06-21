@@ -31,7 +31,7 @@
               <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
                 <mat-form-field class="w-100" appearance="fill">
                   <mat-label>Correo electrónico</mat-label>
-                  <mat-icon matPrefix class="ms-2 me-3"><img src="../../../../assets/icons/user.svg" class="icon_menu" alt="Bootstrap" width="15" height="15"></mat-icon>
+                  <mat-icon matPrefix class="ms-2 me-3"><img src="../../../../assets/icons/user.svg" class="input_icons" alt="Bootstrap" width="15" height="15"></mat-icon>
                   <input type="email" matInput placeholder="Email" formControlName="email" required>
 
                   <mat-icon matSuffix class="ms-2 me-3" *ngIf="loginForm.get('email')?.value && loginForm.get('email')?.valid"><img src="../../../../assets/icons/Path-1685.svg" class="icon_menu" alt="Bootstrap" width="15" height="15"></mat-icon>
@@ -43,7 +43,7 @@
                 </mat-form-field>
                 <mat-form-field class="w-100" appearance="fill">
                   <mat-label>Contraseña</mat-label>
-                  <mat-icon matPrefix class="ms-2 me-3"><img src="../../../../assets/icons/Group-152.svg" class="icon_menu" alt="Bootstrap" width="15" height="15"></mat-icon>
+                  <mat-icon matPrefix class="ms-2 me-3"><img src="../../../../assets/icons/Group-152.svg" class="input_icons" alt="Bootstrap" width="15" height="15"></mat-icon>
                   <input matInput type="password" placeholder="Password" formControlName="password" required>
 
                   <mat-icon matSuffix class="ms-2 me-3" *ngIf="loginForm.get('password')?.value && loginForm.get('password')?.valid"><img src="../../../../assets/icons/Path-1685.svg" class="icon_menu" alt="Bootstrap" width="15" height="15"></mat-icon>
