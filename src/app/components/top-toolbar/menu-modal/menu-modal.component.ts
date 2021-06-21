@@ -24,18 +24,13 @@ export class MenuModalComponent implements OnInit {
   }
 
   changeView(view:any) {
-    let exist = JSON.parse(localStorage.getItem('Token')!);
-    if(exist === null) {
-      console.log('No autorizado')
-    } else {
-      this.isLoading = false;
+    this.isLoading = false;
       setTimeout(() => {
         this.watchService.anotherView(view);
         this.isLoading = true;
         this.dialogRef.close();
       }, 100);
       this.router.navigate(['/auth/hero-list']);
-    }
   }
 
   async logout() {
