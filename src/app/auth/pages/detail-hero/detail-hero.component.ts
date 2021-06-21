@@ -71,10 +71,11 @@ export class DetailHeroComponent implements OnInit {
   }
 
   async getComictsByCharacter(url:string) {
-    
+    let fullURL = url;
+    let notHTTP = fullURL.substring(4, fullURL.length);
     const id = this.router.snapshot.paramMap.get('id');
     
-    await this.charactersService.getComictsByCharacter(url).subscribe(resp => {
+    await this.charactersService.getComictsByCharacter(notHTTP).subscribe(resp => {
       this.detailComics = resp.data.results;
       console.log(this.detailComics);
       this.isLoading = true;

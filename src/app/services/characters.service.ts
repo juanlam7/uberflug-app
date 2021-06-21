@@ -20,7 +20,7 @@ export class CharactersService {
   }
 
   getComictsByCharacter(url: string) : Observable<any> {
-    const endpoint = `${url}?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=100`;
+    const endpoint = `https${url}?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=100`;
     return this.http.get<any>(endpoint);
   }
 }
