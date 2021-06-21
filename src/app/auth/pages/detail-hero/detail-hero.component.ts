@@ -45,6 +45,7 @@ export class DetailHeroComponent implements OnInit {
   detail: any;
   detailComics: any =[];
   formatHour: any;
+  diffFav: boolean = false;
 
   constructor(private router: ActivatedRoute, 
               private _route: Router, 
@@ -100,4 +101,22 @@ export class DetailHeroComponent implements OnInit {
         })
   }
 
+  favoriteButton(item: any) {
+    this.diffFav === false ? this.diffFav = true : this.diffFav = false;
+    let exist = JSON.parse(localStorage.getItem('Favoritos')!);
+    if(exist === null) {
+      localStorage.setItem('Favoritos',  JSON.stringify([item]))
+    } else {
+      let check = exist.find((fav:any) => {
+        return fav.id === item.id
+      })
+      if(check){
+        let updatedExist = exist.filter((item:any) => item.id !== check.id);
+        localStorage.setItem('Favoritos',  JSON.stringify(updatedExist))
+      } else {
+        exist.push(item)
+        localStorage.setItem('Favoritos',  JSON.stringify(exist))
+      }
+    }
+  }
 }

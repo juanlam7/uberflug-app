@@ -8,6 +8,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 import { HerosListComponent } from './pages/heros-list/heros-list.component';
 import { FavHerosListComponent } from './pages/fav-heros-list/fav-heros-list.component';
@@ -30,7 +31,8 @@ import { ModalComponent } from './pages/detail-hero/modal/modal.component';
     CarouselModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class AuthModule { }
