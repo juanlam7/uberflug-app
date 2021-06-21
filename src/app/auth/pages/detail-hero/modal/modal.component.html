@@ -6,7 +6,11 @@
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7">
             <h1>{{ data.payload?.title }}</h1>
-            <p>{{ data.payload?.description }}</p>
+            <p class="text-start">
+                <span style="color: #0090EF; font-size: 12px; font-weight: bold;">{{ data.date }}</span>
+                <br>
+                {{ data.payload?.description }}
+            </p>
         </div>
     </div>
 </div>

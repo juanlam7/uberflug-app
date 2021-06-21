@@ -4,7 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CharactersService } from 'src/app/services/characters.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { ModalComponent } from './modal/modal.component'
+import { ModalComponent } from './modal/modal.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-detail-hero',
@@ -12,6 +13,8 @@ import { ModalComponent } from './modal/modal.component'
   styleUrls: ['./detail-hero.component.scss']
 })
 export class DetailHeroComponent implements OnInit {
+
+  isLoading: boolean = false;
   title = 'ng-carousel-demo';
   
   customOptions: OwlOptions = {
@@ -40,7 +43,8 @@ export class DetailHeroComponent implements OnInit {
   }
 
   detail: any;
-  detailComics: any;
+  detailComics: any =[];
+  formatHour: any;
 
   constructor(private router: ActivatedRoute, 
               private _route: Router, 
@@ -59,6 +63,7 @@ export class DetailHeroComponent implements OnInit {
     await this.charactersService.getDetailCharacter(id).subscribe(resp => {
       this.detail = resp.data.results[0];
       console.log(this.detail);
+      this.formatHour = moment(this.detail?.modified).format('LL');
       this.getComictsByCharacter(this.detail.comics.collectionURI);
     }, (error) => {
       console.log(error);
@@ -72,6 +77,7 @@ export class DetailHeroComponent implements OnInit {
     await this.charactersService.getComictsByCharacter(url).subscribe(resp => {
       this.detailComics = resp.data.results;
       console.log(this.detailComics);
+      this.isLoading = true;
     }, (error) => {
       console.log(error);
     });
@@ -82,7 +88,7 @@ export class DetailHeroComponent implements OnInit {
     const dialogRef: MatDialogRef<any> = this.dialog.open(ModalComponent, {
         width: '1080px',
         disableClose: true,
-        data: {title: title, payload: data}
+        data: {title: title, date: this.formatHour, payload: data}
     })
     dialogRef.afterClosed()
         .subscribe(res => {

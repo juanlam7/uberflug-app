@@ -8,6 +8,8 @@ import { CharactersService } from 'src/app/services/characters.service';
 })
 export class HerosListComponent implements OnInit {
 
+  isLoading: boolean = false;
+
   allCharacters: any;
   page!: number;
   results: number = 12;
@@ -20,6 +22,7 @@ export class HerosListComponent implements OnInit {
       this.allCharacters = resp.data.results;
       console.log(this.allCharacters);
       localStorage.setItem('Characters',  JSON.stringify(this.allCharacters))
+      this.isLoading = true;
     }, (error) => {
       console.log(error);
     });
