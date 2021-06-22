@@ -25,6 +25,7 @@ export class HerosListComponent implements OnInit {
     this.watchService.watchFeedChange().subscribe((res) => {
       this.changeView = res;
       this.page = 1;
+      this.isLoading = false;
       //console.log(res);
       this.charactersService.getAllCharacters().subscribe(resp => {
         this.favoritesService.getFavorite().subscribe((value) => {
@@ -43,15 +44,16 @@ export class HerosListComponent implements OnInit {
           }
           if (this.changeView === 'fav') {
             this.allCharacters = favCharactes;
+            this.isLoading = true;
             localStorage.setItem('CharactersFav',  JSON.stringify(this.allCharacters))
             //console.log(this.allCharacters)
           } else {
             this.allCharacters = resp.data.results;
+            this.isLoading = true;
             localStorage.setItem('Characters',  JSON.stringify(this.allCharacters))
             //console.log(this.allCharacters)
           }
         })
-        this.isLoading = true;
       }, (error) => {
         console.log(error);
       });
