@@ -1,30 +1,25 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoritesService {
 
-  constructor(public firestore: AngularFirestore) { }
+  constructor() { }
 
-  getFavorite() { 
-    //return this.firestore.collection("favorites").valueChanges();
-    return this.firestore.collection("favorites").snapshotChanges();
+  getFavorite(): Observable<any> {
+     return of([]);
   }
 
   createFavorite(data: any) {
-    return new Promise<any>((resolve, reject) =>{
-        this.firestore
-            .collection("favorites")
-            .add(data)
-            .then(res => {resolve(res)}, err => reject(err));
+    return new Promise<any>((resolve, reject) => {
+      resolve('res')
     });
   }
   deleteFavorite(id: any) {
-    return this.firestore
-        .collection("favorites")
-        .doc(id)
-        .delete();
+    return new Promise<any>((resolve, reject) => {
+      resolve('res')
+    });
   }
 }

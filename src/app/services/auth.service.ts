@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import  firebase  from 'firebase/app';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { first } from 'rxjs/operators';
 
 @Injectable({
@@ -9,51 +6,35 @@ import { first } from 'rxjs/operators';
 })
 export class AuthService {
 
-  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {}
+  constructor() {}
   
   async login(email: string, password: string): Promise<any> {
-    try {
-      const { user } = await this.afAuth.signInWithEmailAndPassword(
-        email,
-        password
-      );
-      return user;
-    } catch (error) {
-      console.log(error);
-    }
+    return new Promise<any>((resolve, reject) => {
+      resolve('res')
+    });
   }
 
   async loginGoogle(): Promise<any> {
-    try {
-      const { user } = await this.afAuth.signInWithPopup(
-        new firebase.auth.GoogleAuthProvider()
-      );
-      return user;
-    } catch (error) {
-      console.log(error);
-    }
+    return new Promise<any>((resolve, reject) => {
+      resolve('res')
+    });
   }
 
   async loginFacebook(): Promise<any> {
-    try {
-      const { user } = await this.afAuth.signInWithPopup(
-        new firebase.auth.FacebookAuthProvider()
-      );
-      return user;
-    } catch (error) {
-      console.log(error);
-    }
+    return new Promise<any>((resolve, reject) => {
+      resolve('res')
+    });
   }
 
   async logout(): Promise<void> {
-    try {
-      await this.afAuth.signOut();
-    } catch (error) {
-      console.log(error);
-    }
+    return new Promise<any>((resolve, reject) => {
+      resolve('res')
+    });
   }
 
   getCurrentUser() {
-    return this.afAuth.authState.pipe(first()).toPromise();
+    return new Promise<any>((resolve, reject) => {
+      resolve('res')
+    });
   }
 }

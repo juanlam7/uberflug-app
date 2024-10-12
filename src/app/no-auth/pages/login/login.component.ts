@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   async onLogin() {
     const { email, password } = this.loginForm.value;
     try {
-      const user = await this.authService.login(email, password);
+      const user = await this.authService.login(email ?? '', password ?? '');
       if (user) {
         localStorage.setItem('Token', 'yet8retj')
         this.router.navigate(['/auth'])

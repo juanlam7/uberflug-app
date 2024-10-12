@@ -66,7 +66,12 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true
             },
             "development": {
               "buildOptimizer": false,
@@ -122,6 +127,5 @@
         }
       }
     }
-  },
-  "defaultProject": "uberflug-app"
+  }
 }
