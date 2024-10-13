@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CharactersService } from 'src/app/services/characters.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ModalComponent } from './modal/modal.component';
-import * as moment from 'moment';
 import { FavoritesService } from 'src/app/services/favorites.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-detail-hero',
