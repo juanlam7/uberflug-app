@@ -18,7 +18,7 @@ export class CardComponent implements OnInit {
   }
 
   detalle(id: string) {
-    this.route.navigate(['/auth/detail-hero', id]);
+    this.route.navigate(['/detail-hero', id]);
   }
 
   favoriteButton(item: any) {

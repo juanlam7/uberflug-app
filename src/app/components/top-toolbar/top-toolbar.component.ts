@@ -31,7 +31,7 @@ export class TopToolbarComponent implements OnInit {
     setTimeout(() => {
       this.watchService.anotherView(view);
     }, 100);
-    this.router.navigate(['/auth/hero-list']);
+    this.router.navigate(['']);
   }
 
   openPopUp (data: any = []) {

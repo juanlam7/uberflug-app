@@ -1,12 +1,11 @@
-import { environment } from './../environments/environment';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
-import { HttpClientModule } from '@angular/common/http';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { provideHttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -17,10 +16,9 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     ComponentsModule,
-    NoopAnimationsModule,
-    HttpClientModule
+    NoopAnimationsModule
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

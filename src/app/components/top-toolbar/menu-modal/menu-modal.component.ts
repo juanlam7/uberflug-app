@@ -30,7 +30,7 @@ export class MenuModalComponent implements OnInit {
         this.isLoading = true;
         this.dialogRef.close();
       }, 100);
-      this.router.navigate(['/auth/hero-list']);
+      this.router.navigate(['/hero-list']);
   }
 
   async logout() {

@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  imports: [AngularMaterialModule, ComponentsModule]
 })
 export class LoginComponent implements OnInit {
 

@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'uberflug-app';
-
-// Para simular inicio de sesión con un token
-/*   constructor() { 
-    const user =  localStorage.setItem('Token', 'asddasd');
-    console.log(localStorage.getItem('Token'));
-  } */
 }

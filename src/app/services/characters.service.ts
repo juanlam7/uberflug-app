@@ -10,17 +10,17 @@ export class CharactersService {
   constructor(public http: HttpClient) { }
 // TODO: add pagination to avoid big load of data who slow down the app performance
   getAllCharacters() : Observable<any> {
-    const endpoint = `https://gateway.marvel.com/v1/public/characters?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=100`;
+    const endpoint = `https://gateway.marvel.com/v1/public/characters?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=12`;
     return this.http.get<any>(endpoint);
   }
 
   getDetailCharacter(id: any) : Observable<any> {
-    const endpoint = `https://gateway.marvel.com/v1/public/characters/${id}?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=100`;
+    const endpoint = `https://gateway.marvel.com/v1/public/characters/${id}?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=12`;
     return this.http.get<any>(endpoint);
   }
 
   getComictsByCharacter(url: string) : Observable<any> {
-    const endpoint = `https${url}?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=100`;
+    const endpoint = `https${url}?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=12`;
     return this.http.get<any>(endpoint);
   }
 }

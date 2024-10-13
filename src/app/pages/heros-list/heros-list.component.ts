@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { ComponentsModule } from 'src/app/components/components.module';
 import { CharactersService } from 'src/app/services/characters.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { WatchService } from 'src/app/services/watch.service';
+import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
 
 @Component({
   selector: 'app-heros-list',
+  standalone: true,
   templateUrl: './heros-list.component.html',
-  styleUrls: ['./heros-list.component.scss']
+  styleUrls: ['./heros-list.component.scss'],
+  imports: [AngularMaterialModule, ComponentsModule]
 })
 export class HerosListComponent implements OnInit {
 

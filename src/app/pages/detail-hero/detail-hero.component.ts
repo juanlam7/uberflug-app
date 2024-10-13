@@ -7,11 +7,15 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ModalComponent } from './modal/modal.component';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import moment from 'moment';
+import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @Component({
   selector: 'app-detail-hero',
+  standalone: true,
   templateUrl: './detail-hero.component.html',
-  styleUrls: ['./detail-hero.component.scss']
+  styleUrls: ['./detail-hero.component.scss'],
+  imports: [AngularMaterialModule, ComponentsModule]
 })
 export class DetailHeroComponent implements OnInit {
 
