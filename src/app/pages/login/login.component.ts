@@ -1,26 +1,38 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-
-import { AuthService } from '../../services/auth.service';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { TopToolbarComponent } from 'src/app/components/top-toolbar/top-toolbar.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [AngularMaterialModule, ComponentsModule]
+  imports: [
+    MatFormFieldModule,
+    CommonModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    TopToolbarComponent,
+    MatIconModule
+  ]
 })
 export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(4),Validators.maxLength(15)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }

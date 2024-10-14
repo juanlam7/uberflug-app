@@ -1,16 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { CardComponent } from 'src/app/components/card/card.component';
+import { TopToolbarComponent } from 'src/app/components/top-toolbar/top-toolbar.component';
 import { CharactersService } from 'src/app/services/characters.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { WatchService } from 'src/app/services/watch.service';
-import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
 
 @Component({
   selector: 'app-heros-list',
   standalone: true,
   templateUrl: './heros-list.component.html',
   styleUrls: ['./heros-list.component.scss'],
-  imports: [AngularMaterialModule, ComponentsModule]
+  imports: [
+    NgxPaginationModule,
+    CommonModule,
+    CardComponent,
+    TopToolbarComponent
+  ]
 })
 export class HerosListComponent implements OnInit {
 
@@ -36,25 +43,25 @@ export class HerosListComponent implements OnInit {
           let favCharactes: any = []
           for (let i = 0; i < value.length; i++) {
             let characterIDFire = value[i].payload.doc.id;
-            let objCharacter:any = value[i].payload.doc.data();
-            
-            let objFavs = resp.data.results.filter((obj:any) => {
-              if (obj.id === objCharacter.id) { 
+            let objCharacter: any = value[i].payload.doc.data();
+
+            let objFavs = resp.data.results.filter((obj: any) => {
+              if (obj.id === objCharacter.id) {
                 obj.id_fire = characterIDFire;
                 return obj
-               }
+              }
             })
             favCharactes.push(objFavs[0])
           }
           if (this.changeView === 'fav') {
             this.allCharacters = favCharactes;
             this.isLoading = true;
-            localStorage.setItem('CharactersFav',  JSON.stringify(this.allCharacters))
+            localStorage.setItem('CharactersFav', JSON.stringify(this.allCharacters))
             //console.log(this.allCharacters)
           } else {
             this.allCharacters = resp.data.results;
             this.isLoading = true;
-            localStorage.setItem('Characters',  JSON.stringify(this.allCharacters))
+            localStorage.setItem('Characters', JSON.stringify(this.allCharacters))
             //console.log(this.allCharacters)
           }
         })
@@ -70,11 +77,11 @@ export class HerosListComponent implements OnInit {
     this.allCharacters.sort(this.sortFunc);
   }
 
-  sortFunc (a: any, b: any) {
+  sortFunc(a: any, b: any) {
     return b === a ? 0 : b < a ? 1 : -1;
   }
 
-  onPageChange(event?:any) {
+  onPageChange(event?: any) {
     event === 9 ? this.results = 4 : this.results = 12;
   }
 }

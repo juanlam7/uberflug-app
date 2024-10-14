@@ -1,11 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { FavoritesService } from 'src/app/services/favorites.service';
 
 @Component({
   selector: 'app-card',
+  standalone: true,
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
+  imports: [MatIconModule, MatButtonModule, CommonModule]
 })
 export class CardComponent implements OnInit {
 
@@ -23,7 +28,7 @@ export class CardComponent implements OnInit {
 
   favoriteButton(item: any) {
     this.diffFav === false ? this.diffFav = true : this.diffFav = false;
-    if (item.id_fire){
+    if (item.id_fire) {
       this.favoritesService.deleteFavorite(item.id_fire).then((value) => {
         delete item.id_fire
       })

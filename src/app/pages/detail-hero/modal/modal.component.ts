@@ -1,13 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import moment from 'moment';
-import { AngularMaterialModule } from 'src/app/shared/angular-material.module';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
   templateUrl: './modal.component.html',
-  imports: [AngularMaterialModule]
+  imports: [MatIconModule, MatDialogModule]
 })
 export class ModalComponent implements OnInit {
 
