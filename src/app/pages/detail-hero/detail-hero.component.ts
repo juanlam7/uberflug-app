@@ -81,7 +81,7 @@ export class DetailHeroComponent implements OnInit {
       // CharactersFav.find((obj: any) => {
       //   if (obj.id === resp.data.results[0].id) { resp.data.results[0].id_fire = obj.id_fire }
       // });
-      this.detail = resp.data.results[0];
+      this.detail = resp[0];
       //console.log(this.detail);
 
       this.formatHour = moment(this.detail?.modified).format('LL');
