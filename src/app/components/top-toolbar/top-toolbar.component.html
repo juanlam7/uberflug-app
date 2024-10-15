@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light justify-content-between mt-3">
     <div class="ms-5">
-        <a (click)="changeView('init')">
+        <a [routerLink]="['']">
             <img id="head" src="../../../assets/images/Subtraction.svg"/>
         </a>
     </div>
@@ -10,7 +10,7 @@
                 <button class="btn btn-link" (click)="openPopUp()">Menu  <img src="../../../assets/icons/burger menu.svg" class="icon_menu" alt="Bootstrap" width="20" height="20"></button>
             </div>
             <div class="col">
-                <p class="nav-link"> {{ userData?.email }}</p>
+                <p class="nav-link"> {{ userData.email }}</p>
             </div>
         </div>
     </div>

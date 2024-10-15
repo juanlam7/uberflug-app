@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, retry, throwError } from 'rxjs';
 import { allCharactersResponse, Character } from '../types/characters';
+import { allComicResponse, Comic } from '../types/comics';
 
 const BASE_API = 'https://gateway.marvel.com/v1/public/characters';
 
@@ -26,9 +27,11 @@ export class CharactersService {
       , catchError(this.handleError));
   }
 
-  getComictsByCharacter(url: string): Observable<any> {
-    const endpoint = `https${url}?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=12`;
-    return this.http.get<any>(endpoint).pipe(retry(1), catchError(this.handleError));
+  getComictsByCharacter(url: string): Observable<Comic[]> {
+    const endpoint = `${url}?ts=1&apikey=e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a&limit=12`;
+    return this.http.get<allComicResponse>(endpoint).pipe(retry(1),
+      map((p) => (p.data.results))
+      , catchError(this.handleError));
   }
 
   handleError(error: any) {

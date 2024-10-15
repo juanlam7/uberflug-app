@@ -1,12 +1,16 @@
+@if (item) {
 <div class="card">
-    <button *ngIf="!item.id_fire" (click)="favoriteButton(item)" class="fav_button" mat-fab color="rgba(255,255,255,1)" aria-label="Example icon button with a heart icon">
+    <button (click)="favoriteButton(item)" class="fav_button" mat-fab color="rgba(255,255,255,1)"
+        aria-label="Example icon button with a heart icon">
         <mat-icon>favorite_border</mat-icon>
     </button>
-    <button *ngIf="item.id_fire" (click)="favoriteButton(item)" class="fav_button" mat-fab color="warn" aria-label="Example icon button with a heart icon">
+    <!-- <button (click)="favoriteButton(item)" class="fav_button" mat-fab color="warn"
+        aria-label="Example icon button with a heart icon">
         <mat-icon>favorite</mat-icon>
-    </button>
-    <div (click)="detalle(item.id)">
+    </button> -->
+    <a [routerLink]="['/detail-hero', item.id]">
         <img src="{{ item.thumbnail.path }}.{{ item.thumbnail.extension }}" class="card_imgde">
         <h3 class="text_img">{{ item.name }}</h3>
-    </div>
+    </a>
 </div>
+}

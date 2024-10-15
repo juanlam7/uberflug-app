@@ -1,12 +1,18 @@
 import { Routes } from '@angular/router';
-import { DetailHeroComponent } from './pages/detail-hero/detail-hero.component';
-import { HerosListComponent } from './pages/heros-list/heros-list.component';
-import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'heros-List', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
-    { path: 'heros-List', component: HerosListComponent },
-    { path: 'detail-hero/:id', component: DetailHeroComponent },
-    { path: '**', redirectTo: '' }
+    { 
+        path: 'login', 
+        loadComponent: () => import('./pages/login/login.component').then(c => c.LoginComponent) 
+    },
+    { 
+        path: 'heros-List', 
+        loadComponent: () => import('./pages/heros-list/heros-list.component').then(c => c.HerosListComponent) 
+    },
+    { 
+        path: 'detail-hero/:id', 
+        loadComponent: () => import('./pages/detail-hero/detail-hero.component').then(c => c.DetailHeroComponent) 
+    },
+    { path: '**', redirectTo: 'heros-List' }
 ];

@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import moment from 'moment';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { TopToolbarComponent } from 'src/app/components/top-toolbar/top-toolbar.component';
+
 import { CharactersService } from 'src/app/services/characters.service';
-import { FavoritesService } from 'src/app/services/favorites.service';
-import { ModalComponent } from './modal/modal.component';
+
+import { Character } from 'src/app/types/characters';
+
+import { CarosuelComicsComponent } from './components/carousel/carousel.component';
 
 @Component({
   selector: 'app-detail-hero',
@@ -19,117 +18,41 @@ import { ModalComponent } from './modal/modal.component';
   styleUrls: ['./detail-hero.component.scss'],
   imports: [
     MatIcon,
-    CarouselModule,
     MatButtonModule,
     CommonModule,
-    TopToolbarComponent
+    CarosuelComicsComponent
   ],
 })
-export class DetailHeroComponent implements OnInit {
+export class DetailHeroComponent {
 
-  isLoading: boolean = false;
-  title = 'ng-carousel-demo';
-
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 5
-      },
-      740: {
-        items: 10
-      },
-      940: {
-        items: 10
-      }
-    },
-    nav: true
-  }
-
-  detail: any;
-  detailComics: any = [];
-  formatHour: any;
+  detail = signal<Character | null>(null);
+  urlGetComics = signal<string | null>(null);
   diffFav: boolean = false;
 
-  constructor(private router: ActivatedRoute,
-    private _route: Router,
-    public charactersService: CharactersService,
-    public favoritesService: FavoritesService,
-    private dialog: MatDialog,
-    private snack: MatSnackBar,) { }
+  charactersService = inject(CharactersService)
+  router = inject(ActivatedRoute)
 
-  ngOnInit(): void {
-    this.getDetailCharacter();
-  }
-
-  async getDetailCharacter() {
-
+  constructor() {
     const id = this.router.snapshot.paramMap.get('id');
+    effect((cleanUp) => {
+      const subscription = this.charactersService.getDetailCharacter(id)
+        .subscribe((p) => {
+          this.detail.set(p[0])
+          this.urlGetComics.set(p[0].comics.collectionURI)
+        })
 
-    await this.charactersService.getDetailCharacter(id).subscribe(resp => {
-
-      // let CharactersFav = JSON.parse(localStorage.getItem('CharactersFav')!);
-      // CharactersFav.find((obj: any) => {
-      //   if (obj.id === resp.data.results[0].id) { resp.data.results[0].id_fire = obj.id_fire }
-      // });
-      this.detail = resp[0];
-      //console.log(this.detail);
-
-      this.formatHour = moment(this.detail?.modified).format('LL');
-      this.getComictsByCharacter(this.detail.comics.collectionURI);
-    }, (error) => {
-      console.log(error);
+      cleanUp(() => {
+        subscription.unsubscribe()
+      });
     });
   }
 
-  async getComictsByCharacter(url: string) {
-    let fullURL = url;
-    let notHTTP = fullURL.substring(4, fullURL.length);
-    const id = this.router.snapshot.paramMap.get('id');
-
-    await this.charactersService.getComictsByCharacter(notHTTP).subscribe(resp => {
-      this.detailComics = resp.data.results;
-      this.isLoading = true;
-    }, (error) => {
-      console.log(error);
-    });
+  formatDate(date: string) {
+    return moment(date).format('LL')
   }
 
-  openPopUp(data: any = []) {
-    const title = 'Heros'
-    const dialogRef: MatDialogRef<any> = this.dialog.open(ModalComponent, {
-      width: '1080px',
-      disableClose: true,
-      data: { title: title, payload: data }
-    })
-    dialogRef.afterClosed()
-      .subscribe(res => {
-        if (!res) {
-          return
-        }
-        console.log(res)
-      })
-  }
-
-  favoriteButton(item: any) {
-    this.diffFav === false ? this.diffFav = true : this.diffFav = false;
-    if (item.id_fire) {
-      this.favoritesService.deleteFavorite(item.id_fire).then((value) => {
-        delete item.id_fire
-      })
-    } else {
-      this.favoritesService.createFavorite(item).then((value) => {
-        item.id_fire = value.id
-      })
-    }
+  favoriteButton(item: Character) {
+    console.log(item)
+    // add logic here to save selected character as favorite
   }
 }

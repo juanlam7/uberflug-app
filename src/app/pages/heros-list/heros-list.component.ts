@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { CardComponent } from 'src/app/components/card/card.component';
-import { TopToolbarComponent } from 'src/app/components/top-toolbar/top-toolbar.component';
+
 import { CharactersService } from 'src/app/services/characters.service';
+
 import { Character } from 'src/app/types/characters';
+
+import { CardComponent } from 'src/app/components/card/card.component';
 
 @Component({
   selector: 'app-heros-list',
@@ -15,7 +17,6 @@ import { Character } from 'src/app/types/characters';
     NgxPaginationModule,
     CommonModule,
     CardComponent,
-    TopToolbarComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

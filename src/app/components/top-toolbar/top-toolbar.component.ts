@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { WatchService } from 'src/app/services/watch.service';
+import { RouterModule } from '@angular/router';
+
 import { MenuModalComponent } from './menu-modal/menu-modal.component';
 
 @Component({
@@ -11,30 +9,16 @@ import { MenuModalComponent } from './menu-modal/menu-modal.component';
   standalone: true,
   templateUrl: './top-toolbar.component.html',
   styleUrls: ['./top-toolbar.component.scss'],
-  imports: [MatDialogModule, MatSnackBarModule]
+  imports: [MatDialogModule, RouterModule]
 })
-export class TopToolbarComponent implements OnInit {
+export class TopToolbarComponent {
 
-  userData: any;
-
-  constructor(private authService: AuthService,
-    private router: Router,
-    private watchService: WatchService,
-    private dialog: MatDialog,
-    private snack: MatSnackBar,) { }
-
-  ngOnInit(): void {
-    this.authService.getCurrentUser().then(resp => {
-      this.userData = resp;
-    })
+  userData = {
+    name: 'juan',
+    email: 'juan@test.com'
   }
 
-  changeView(view: any) {
-    setTimeout(() => {
-      this.watchService.anotherView(view);
-    }, 100);
-    this.router.navigate(['']);
-  }
+  dialog = inject(MatDialog);
 
   openPopUp(data: any = []) {
     const title = 'Menu'

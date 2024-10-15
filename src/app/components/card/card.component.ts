@@ -1,41 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
-import { FavoritesService } from 'src/app/services/favorites.service';
+import { Router, RouterModule } from '@angular/router';
+
+import { Character } from 'src/app/types/characters';
 
 @Component({
   selector: 'app-card',
   standalone: true,
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
-  imports: [MatIconModule, MatButtonModule, CommonModule]
+  imports: [MatIconModule, MatButtonModule, CommonModule, RouterModule]
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
 
-  @Input() item: any;
-  diffFav: boolean = false;
+  @Input() item: Character | null = null;
 
-  constructor(private route: Router, private favoritesService: FavoritesService) { }
+  route =  inject(Router);
 
-  ngOnInit(): void {
-  }
-
-  detalle(id: string) {
+  detalle(id: number) {
     this.route.navigate(['/detail-hero', id]);
   }
 
-  favoriteButton(item: any) {
-    this.diffFav === false ? this.diffFav = true : this.diffFav = false;
-    if (item.id_fire) {
-      this.favoritesService.deleteFavorite(item.id_fire).then((value) => {
-        delete item.id_fire
-      })
-    } else {
-      this.favoritesService.createFavorite(item).then((value) => {
-        item.id_fire = value.id
-      })
-    }
+  favoriteButton(item: Character) {
+    console.log(item)
+    // add logic here to save selected character as favorite
   }
 }
