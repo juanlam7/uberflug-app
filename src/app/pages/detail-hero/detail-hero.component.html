@@ -1,39 +1,50 @@
-
 <div class="container-fluid p-5">
-
-    @if (detail(); as detail) {
+  @if (detail(); as detail) {
     <div>
-        <div class="row mt-3">
-            <div class="col-8">
-                <img class="hero_img" src="{{ detail?.thumbnail?.path }}.{{ detail?.thumbnail?.extension }}">
-            </div>
-            <div class="col-4">
-                <div class="card p-5 card_description">
-                    <button (click)="favoriteButton(detail)" class="fav_button" mat-fab
-                        color="rgba(255,255,255,1)" aria-label="heart icon">
-                        <mat-icon>favorite_border</mat-icon>
-                    </button>
-                    <!-- <button (click)="favoriteButton(detail)" class="fav_button" mat-fab
+      <div class="row mt-3">
+        <div class="col-8">
+          <img
+            class="hero_img"
+            src="{{ detail?.thumbnail?.path }}.{{
+              detail?.thumbnail?.extension
+            }}" />
+        </div>
+        <div class="col-4">
+          <div class="card p-5 card_description">
+            <button
+              (click)="favoriteButton(detail)"
+              class="fav_button"
+              mat-fab
+              color="rgba(255,255,255,1)"
+              aria-label="heart icon">
+              <mat-icon>favorite_border</mat-icon>
+            </button>
+            <!-- <button (click)="favoriteButton(detail)" class="fav_button" mat-fab
                         color="warn" aria-label="Example icon button with a heart icon">
                         <mat-icon>favorite</mat-icon>
                     </button> -->
-                    <h1 class="text_img">{{ detail?.name }}</h1>
-                    <br>
-                    <p class="text-start">
-                        <span class="blue_text">Update {{ formatDate(detail.modified) }}</span>
-                        <br>
-                        {{ detail?.description }}
-                    </p>
-                </div>
-            </div>
+            <h1 class="text_img">{{ detail?.name }}</h1>
+            <br />
+            <p class="text-start">
+              <span class="blue_text"
+                >Update {{ formatDate(detail.modified) }}</span
+              >
+              <br />
+              {{ detail?.description }}
+            </p>
+          </div>
         </div>
-        @if (urlGetComics(); as urlGetComics) {
-            <app-carusel-comics [urlComics]="urlGetComics" ></app-carusel-comics>
-        } @else {
-            <p>Cargando...</p>
-        }
-    </div>
-    } @else {
+      </div>
+      @if (urlGetComics(); as urlGetComics) {
+        <a style="text-decoration: none" [routerLink]="['/comics-list', detail.id]">
+          Comics By hero
+        </a>
+        <app-carusel-comics [urlComics]="urlGetComics"></app-carusel-comics>
+      } @else {
         <p>Cargando...</p>
-    }
+      }
+    </div>
+  } @else {
+    <p>Cargando...</p>
+  }
 </div>

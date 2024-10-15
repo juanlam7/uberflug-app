@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import moment from 'moment';
 
 import { CharactersService } from 'src/app/services/characters.service';
@@ -20,39 +20,40 @@ import { CarosuelComicsComponent } from './components/carousel/carousel.componen
     MatIcon,
     MatButtonModule,
     CommonModule,
-    CarosuelComicsComponent
+    CarosuelComicsComponent,
+    RouterModule,
   ],
 })
 export class DetailHeroComponent {
-
   detail = signal<Character | null>(null);
   urlGetComics = signal<string | null>(null);
   diffFav: boolean = false;
 
-  charactersService = inject(CharactersService)
-  router = inject(ActivatedRoute)
+  charactersService = inject(CharactersService);
+  router = inject(ActivatedRoute);
 
   constructor() {
     const id = this.router.snapshot.paramMap.get('id');
-    effect((cleanUp) => {
-      const subscription = this.charactersService.getDetailCharacter(id)
-        .subscribe((p) => {
-          this.detail.set(p[0])
-          this.urlGetComics.set(p[0].comics.collectionURI)
-        })
+    effect(cleanUp => {
+      const subscription = this.charactersService
+        .getDetailCharacter(id)
+        .subscribe(p => {
+          this.detail.set(p[0]);
+          this.urlGetComics.set(p[0].comics.collectionURI);
+        });
 
       cleanUp(() => {
-        subscription.unsubscribe()
+        subscription.unsubscribe();
       });
     });
   }
 
   formatDate(date: string) {
-    return moment(date).format('LL')
+    return moment(date).format('LL');
   }
 
   favoriteButton(item: Character) {
-    console.log(item)
+    console.log(item);
     // add logic here to save selected character as favorite
   }
 }
