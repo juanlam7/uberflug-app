@@ -2,10 +2,22 @@
   <div>
     @if (allCharacters(); as allCharacters) {
       <div class="row">
-        <!-- Put here a sort filter -->
+
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Search</mat-label>
+          <input matInput type="text" [(ngModel)]="InputFieldSearchValue" />
+          <button *ngIf="InputFieldSearchValue()" matSuffix mat-icon-button aria-label="Clear" (click)="InputFieldSearchValue.set('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        
+        <button color="warn" mat-stroked-button (click)="sortAllCharacters()">
+          {{ charactersOrder() }}
+        </button>
+
       </div>
       <div class="row mt-3">
-        @for (item of allCharacters; track item.name) {
+        @for (item of allCharacters | CharacterFilter: InputFieldSearchValue(); track item.name) {
           @defer (on viewport) {
             <div class="col-2 mt-3 mb-3">
               <app-card [item]="item"></app-card>
