@@ -3,21 +3,33 @@
     @if (allCharacters(); as allCharacters) {
       <div class="row">
 
+        <!-- TODO: create component for input Search field -->
         <mat-form-field class="form-field" appearance="fill">
           <mat-label>Search</mat-label>
           <input matInput type="text" [(ngModel)]="InputFieldSearchValue" />
-          <button *ngIf="InputFieldSearchValue()" matSuffix mat-icon-button aria-label="Clear" (click)="InputFieldSearchValue.set('')">
+          <button
+            *ngIf="InputFieldSearchValue()"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="InputFieldSearchValue.set('')">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
-        
+
+        <!-- TODO: create component for sort button -->
         <button color="warn" mat-stroked-button (click)="sortAllCharacters()">
           {{ charactersOrder() }}
         </button>
 
       </div>
       <div class="row mt-3">
-        @for (item of allCharacters | CharacterFilter: InputFieldSearchValue(); track item.name) {
+
+        <!-- TODO: create component for grid of heros -->
+        @for (
+          item of allCharacters | CharacterFilter: InputFieldSearchValue();
+          track item.name
+        ) {
           @defer (on viewport) {
             <div class="col-2 mt-3 mb-3">
               <app-card [item]="item"></app-card>
@@ -29,6 +41,7 @@
             </div>
           }
         }
+        
       </div>
     } @else {
       <p>Cargando...</p>

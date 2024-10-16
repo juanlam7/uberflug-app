@@ -48,6 +48,7 @@ export class HerosListComponent {
 
   limit = signal<number>(12);
   offset = signal<number>(0);
+  total = signal<number>(0);
 
   charactersOrder = signal<orderArr>('asc');
 
@@ -58,7 +59,10 @@ export class HerosListComponent {
       const subscription = this.charactersService
         .getAllCharacters(this.limit(), this.offset())
         .subscribe(p => {
-          this.allCharacters.update(val => (val ? [...val, ...p] : p));
+          this.total.set(p.total);
+          this.allCharacters.update(val =>
+            val ? [...val, ...p.results] : p.results
+          );
         });
 
       cleanUp(() => subscription.unsubscribe());
@@ -66,7 +70,9 @@ export class HerosListComponent {
   }
 
   onNearEndScroll(): void {
-    this.offset.update(oldvalue => oldvalue + 12);
+    if (this.offset() < this.total()) {
+      this.offset.update(oldvalue => oldvalue + 12);
+    }
   }
 
   sortAllCharacters(): void {
