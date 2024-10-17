@@ -13,8 +13,11 @@ import { sortArrayByName } from 'src/app/utils/stringsMethods';
 @Component({
   selector: 'sort-button',
   standalone: true,
-  templateUrl: './sort.component.html',
-  styleUrls: ['./sort.component.scss'],
+  template: `
+    <button color="warn" mat-stroked-button (click)="sortAllCharacters()">
+      {{ charactersOrder() }}
+    </button>
+  `,
   imports: [MatButton, MatButtonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

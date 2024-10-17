@@ -14,8 +14,20 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'search-field',
   standalone: true,
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  template: `
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" [(ngModel)]="InputSearch" />
+      <button
+        *ngIf="InputSearch()"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="InputSearch.set('')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  `,
   imports: [
     CommonModule,
     MatButton,

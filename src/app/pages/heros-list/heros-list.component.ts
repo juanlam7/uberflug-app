@@ -17,7 +17,6 @@ import { SortComponent } from './components/sort/sort.component';
   selector: 'heros-list',
   standalone: true,
   templateUrl: './heros-list.component.html',
-  styleUrls: ['./heros-list.component.scss'],
   imports: [
     CommonModule,
     ScrollNearEndDirective,
