@@ -1,10 +1,10 @@
 <div class="container-fluid p-5" appScrollNearEnd (nearEnd)="onNearEndScroll()">
   <div>
-    @if (allCharacters(); as allCharacters) {
+    @if (allCharacters()) {
       <div class="row">
         <search-field [InputSearch]="InputFieldSearchValue" />
         <sort-button [charactersList]="allCharacters" />
-        <grid-list [charactersList]="allCharacters" [InputSearch]="InputFieldSearchValue()" />
+        <grid-list [charactersList]="allCharacters()" [InputSearch]="InputFieldSearchValue()" />
       </div>
     } @else {
       <p>Cargando...</p>

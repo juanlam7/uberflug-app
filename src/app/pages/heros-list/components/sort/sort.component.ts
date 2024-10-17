@@ -1,8 +1,9 @@
 import {
-    ChangeDetectionStrategy,
-    Component,
-    input,
-    signal
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  signal,
+  WritableSignal,
 } from '@angular/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { Character } from 'src/app/types/characters';
@@ -18,13 +19,15 @@ import { sortArrayByName } from 'src/app/utils/stringsMethods';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SortComponent {
-  charactersList = input.required<Character[]>();
+  charactersList = input.required<WritableSignal<Character[] | null>>();
 
   charactersOrder = signal<orderArr>('asc');
 
   sortAllCharacters(): void {
     this.charactersOrder.update(val => (val === 'asc' ? 'desc' : 'asc'));
 
-    sortArrayByName(this.charactersList(), this.charactersOrder())
+    this.charactersList().update(val =>
+      sortArrayByName(val ?? [], this.charactersOrder())
+    );
   }
 }

@@ -1,6 +1,6 @@
 <div class="row mt-3">
   @for (
-    item of charactersList() | CharacterFilter: InputSearch();
+    item of charactersList() ?? [] | CharacterFilter: InputSearch();
     track item.name
   ) {
     @defer (on viewport) {
