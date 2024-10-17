@@ -2,6 +2,8 @@
   @if (detail(); as detail) {
     <div>
       <div class="row mt-3">
+
+        <!-- create component here for img hero detail -->
         <div class="col-8">
           <img
             class="hero_img"
@@ -9,8 +11,12 @@
               detail?.thumbnail?.extension
             }}" />
         </div>
+
+        <!-- create component here for information box hero detail -->
         <div class="col-4">
           <div class="card p-5 card_description">
+
+            <!-- create cross component here for handled add favorite button and his logic -->
             <button
               (click)="favoriteButton(detail)"
               class="fav_button"
@@ -19,10 +25,15 @@
               aria-label="heart icon">
               <mat-icon>favorite_border</mat-icon>
             </button>
-            <!-- <button (click)="favoriteButton(detail)" class="fav_button" mat-fab
-                        color="warn" aria-label="Example icon button with a heart icon">
-                        <mat-icon>favorite</mat-icon>
-                    </button> -->
+            <!-- <button
+              (click)="favoriteButton(detail)"
+              class="fav_button"
+              mat-fab
+              color="warn"
+              aria-label="Example icon button with a heart icon">
+              <mat-icon>favorite</mat-icon>
+            </button> -->
+
             <h1 class="text_img">{{ detail?.name }}</h1>
             <br />
             <p class="text-start">
@@ -34,15 +45,22 @@
             </p>
           </div>
         </div>
+
       </div>
+
+      <!-- create component here for move outside all carusel logic -->
       @if (urlGetComics(); as urlGetComics) {
-        <a style="text-decoration: none" [routerLink]="['/comics-list', detail.id]">
+        <!-- create component here for redirect comics list page with hero id -->
+        <a
+          style="text-decoration: none"
+          [routerLink]="['/comics-list', detail.id]">
           Comics By hero
         </a>
         <app-carusel-comics [urlComics]="urlGetComics"></app-carusel-comics>
       } @else {
         <p>Cargando...</p>
       }
+      
     </div>
   } @else {
     <p>Cargando...</p>
