@@ -32,7 +32,6 @@ import { Character } from 'src/app/types/characters';
 export class FavoriteComponent {
   detail = input.required<Character | null>();
   customClass = input.required<string>();
-  title = 'uberflug-app';
 
   favoriteButton() {
     console.log('Add to favorite');

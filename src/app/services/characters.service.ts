@@ -32,7 +32,7 @@ export class CharactersService {
   }
 
   getDetailCharacter(id: any): Observable<Character[]> {
-    const endpoint = `${BASE_API}/${id}?ts=1&apikey=${API_KEY}&limit=12`;
+    const endpoint = `${BASE_API}/${id}?ts=1&apikey=${API_KEY}`;
     return this.http.get<allCharactersResponse>(endpoint).pipe(
       retry(1),
       map(p => p.data.results),

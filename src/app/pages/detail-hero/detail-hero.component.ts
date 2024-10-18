@@ -1,22 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import moment from 'moment';
-import { FavoriteComponent } from 'src/app/components/favorite-btn/favorite.component';
 import { CharactersService } from 'src/app/services/characters.service';
 import { Character } from 'src/app/types/characters';
 import { CarosuelComicsComponent } from './components/carousel/carousel.component';
+import { ImageHeroComponent } from './components/image/image.component';
+import { InfoHeroComponent } from './components/info/info.component';
 
 @Component({
   selector: 'app-detail-hero',
   standalone: true,
   templateUrl: './detail-hero.component.html',
-  styleUrls: ['./detail-hero.component.scss'],
   imports: [
     CommonModule,
     CarosuelComicsComponent,
     RouterModule,
-    FavoriteComponent,
+    ImageHeroComponent,
+    InfoHeroComponent,
   ],
 })
 export class DetailHeroComponent {
@@ -41,9 +41,5 @@ export class DetailHeroComponent {
         subscription.unsubscribe();
       });
     });
-  }
-
-  formatDate(date: string) {
-    return moment(date).format('LL');
   }
 }

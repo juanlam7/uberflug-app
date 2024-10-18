@@ -1,52 +1,25 @@
 <div class="container-fluid p-5">
   @if (detail(); as detail) {
-    <div>
-      <div class="row mt-3">
-
-        <!-- create component here for img hero detail -->
-        <div class="col-8">
-          <img
-            class="hero_img"
-            src="{{ detail?.thumbnail?.path }}.{{
-              detail?.thumbnail?.extension
-            }}" />
-        </div>
-
-        <!-- create component here for information box hero detail -->
-        <div class="col-4">
-          <div class="card p-5 card_description">
-
-            <!-- create cross component here for handled add favorite button and his logic -->
-            <favorite-btn [detail]="detail" customClass="fav-button--detail" />
-
-            <h1 class="text_img">{{ detail?.name }}</h1>
-            <br />
-            <p class="text-start">
-              <span class="blue_text"
-                >Update {{ formatDate(detail.modified) }}</span
-              >
-              <br />
-              {{ detail?.description }}
-            </p>
-          </div>
-        </div>
-
+    <div class="row mt-3">
+      <div class="col-8">
+        <image-hero [detail]="detail" />
       </div>
-
-      <!-- create component here for move outside all carusel logic -->
-      @if (urlGetComics(); as urlGetComics) {
-        <!-- create component here for redirect comics list page with hero id -->
-        <a
-          style="text-decoration: none"
-          [routerLink]="['/comics-list', detail.id]">
-          Comics By hero
-        </a>
-        <app-carusel-comics [urlComics]="urlGetComics"></app-carusel-comics>
-      } @else {
-        <p>Cargando...</p>
-      }
-      
+      <div class="col-4">
+        <info-hero [detail]="detail" />
+      </div>
     </div>
+    <!-- create component here for move outside all carusel logic -->
+    @if (urlGetComics(); as urlGetComics) {
+      <!-- create component here for redirect comics list page with hero id -->
+      <a
+        style="text-decoration: none"
+        [routerLink]="['/comics-list', detail.id]">
+        Comics By hero
+      </a>
+      <app-carusel-comics [urlComics]="urlGetComics"></app-carusel-comics>
+    } @else {
+      <p>Cargando...</p>
+    }
   } @else {
     <p>Cargando...</p>
   }
