@@ -8,18 +8,7 @@
         <info-hero [detail]="detail" />
       </div>
     </div>
-    <!-- create component here for move outside all carusel logic -->
-    @if (urlGetComics(); as urlGetComics) {
-      <!-- create component here for redirect comics list page with hero id -->
-      <a
-        style="text-decoration: none"
-        [routerLink]="['/comics-list', detail.id]">
-        Comics By hero
-      </a>
-      <app-carusel-comics [urlComics]="urlGetComics"></app-carusel-comics>
-    } @else {
-      <p>Cargando...</p>
-    }
+    <carusel-comics [detail]="detail"></carusel-comics>
   } @else {
     <p>Cargando...</p>
   }

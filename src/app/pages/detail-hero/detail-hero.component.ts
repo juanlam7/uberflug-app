@@ -17,12 +17,11 @@ import { InfoHeroComponent } from './components/info/info.component';
     RouterModule,
     ImageHeroComponent,
     InfoHeroComponent,
+    CarosuelComicsComponent,
   ],
 })
 export class DetailHeroComponent {
   detail = signal<Character | null>(null);
-  urlGetComics = signal<string | null>(null);
-  diffFav: boolean = false;
 
   charactersService = inject(CharactersService);
   router = inject(ActivatedRoute);
@@ -32,10 +31,7 @@ export class DetailHeroComponent {
     effect(cleanUp => {
       const subscription = this.charactersService
         .getDetailCharacter(id)
-        .subscribe(p => {
-          this.detail.set(p[0]);
-          this.urlGetComics.set(p[0].comics.collectionURI);
-        });
+        .subscribe(p => this.detail.set(p[0]));
 
       cleanUp(() => {
         subscription.unsubscribe();
