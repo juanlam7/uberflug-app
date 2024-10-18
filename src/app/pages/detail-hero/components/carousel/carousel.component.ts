@@ -9,48 +9,20 @@ import {
 } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CharactersService } from 'src/app/services/characters.service';
 import { Character } from 'src/app/types/characters';
 import { Comic } from 'src/app/types/comics';
 import { ModalComponent } from '../modal/modal.component';
-
-const CarouselConfig: OwlOptions = {
-  loop: true,
-  mouseDrag: true,
-  touchDrag: false,
-  pullDrag: false,
-  dots: false,
-  navSpeed: 700,
-  navText: ['', ''],
-  responsive: {
-    0: {
-      items: 1,
-    },
-    400: {
-      items: 5,
-    },
-    740: {
-      items: 10,
-    },
-    940: {
-      items: 10,
-    },
-  },
-  nav: true,
-};
 
 @Component({
   selector: 'carusel-comics',
   standalone: true,
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
-  imports: [CarouselModule, CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarosuelComicsComponent {
-  customOptions = CarouselConfig;
-
   detail = input.required<Character>();
 
   AllComics = signal<Comic[] | null>(null);

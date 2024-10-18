@@ -3,21 +3,25 @@
   <a class="redirect_comics" [routerLink]="['/comics-list', detail().id]">
     Comics By hero
   </a>
-
-  <owl-carousel-o [options]="customOptions">
-    <ng-container *ngFor="let slide of AllComics">
-      <ng-template carouselSlide id="slide.id">
-        <div class="card_bott m-2" (click)="openPopUp(slide)">
-          <img
-            class="card_comic"
-            src="{{ slide?.thumbnail?.path }}.{{
-              slide?.thumbnail?.extension
-            }}" />
-          <h5 class="text-center">{{ slide.title }}</h5>
+  
+  <div id="carouselExample" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="row">
+          <div class="col" *ngFor="let item of AllComics.slice(0, 10)">
+            <img
+              src="{{ item?.thumbnail?.path }}.{{
+                item?.thumbnail?.extension
+              }}"
+              class="d-block w-100"
+              alt="..."
+              style="width: 100%" (click)="openPopUp(item)" />
+              <h5 class="text-center">{{ item.title }}</h5>
+          </div>
         </div>
-      </ng-template>
-    </ng-container>
-  </owl-carousel-o>
+      </div>
+    </div>
+  </div>
 } @else {
   <p>Cargando...</p>
 }

@@ -1,17 +1,14 @@
-.card_comic{
-    border-radius: 15px;
-    max-height: 35em;
-    max-width: 25em;
-}
-.card_bott{
-    border-radius: 15px;
-    max-height: 40em;
-    max-width: 25em;
-}
-
 .redirect_comics {
     display: flex;
     justify-content: end;
     text-decoration: none;
     color: red;
+}
+
+.carousel-item img {
+    max-height: 100px; /* Adjust height as needed */
+    object-fit: cover; /* Ensures images cover the area */
+    border-radius: 15px;
+    max-height: 35em;
+    max-width: 25em;
 }
