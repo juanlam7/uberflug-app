@@ -1,19 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, input, Input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CharactersService } from 'src/app/services/characters.service';
+import { Character } from 'src/app/types/characters';
 import { Comic } from 'src/app/types/comics';
 import { ModalComponent } from '../modal/modal.component';
-import { RouterModule } from '@angular/router';
-import { Character } from 'src/app/types/characters';
 
 @Component({
   selector: 'carusel-comics',
   standalone: true,
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
-  imports: [CarouselModule, CommonModule, CarosuelComicsComponent, RouterModule],
+  imports: [
+    CarouselModule,
+    CommonModule,
+    RouterModule,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarosuelComicsComponent {
   detail = input.required<Character>();

@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import moment from 'moment';
 import { FavoriteComponent } from 'src/app/components/favorite-btn/favorite.component';
 import { Character } from 'src/app/types/characters';
@@ -33,7 +32,8 @@ import { Character } from 'src/app/types/characters';
       font-weight: bold;
     }
   `,
-  imports: [CommonModule, FavoriteComponent],
+  imports: [FavoriteComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoHeroComponent {
   detail = input.required<Character>();

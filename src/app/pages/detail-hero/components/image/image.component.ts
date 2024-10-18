@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Character } from 'src/app/types/characters';
 
 @Component({
@@ -17,6 +17,7 @@ import { Character } from 'src/app/types/characters';
       object-fit: cover;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageHeroComponent {
   detail = input.required<Character>();

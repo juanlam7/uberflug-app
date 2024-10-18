@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CharactersService } from 'src/app/services/characters.service';
 import { Character } from 'src/app/types/characters';
 import { CarosuelComicsComponent } from './components/carousel/carousel.component';
@@ -14,11 +20,11 @@ import { InfoHeroComponent } from './components/info/info.component';
   imports: [
     CommonModule,
     CarosuelComicsComponent,
-    RouterModule,
     ImageHeroComponent,
     InfoHeroComponent,
     CarosuelComicsComponent,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailHeroComponent {
   detail = signal<Character | null>(null);
