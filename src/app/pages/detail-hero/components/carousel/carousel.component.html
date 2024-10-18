@@ -1,29 +1,23 @@
 @if (AllComics(); as AllComics) {
-  <div class="row mt-5">
-    <div class="col-12">
-      <h1>COMICS</h1>
-      <a
-        style="text-decoration: none"
-        [routerLink]="['/comics-list', detail().id]">
-        Comics By hero
-      </a>
+  <h1 style="margin: 0">COMICS</h1>
+  <a class="redirect_comics" [routerLink]="['/comics-list', detail().id]">
+    Comics By hero
+  </a>
 
-      <owl-carousel-o [options]="customOptions">
-        <ng-container *ngFor="let slide of AllComics">
-          <ng-template carouselSlide id="slide.id">
-            <div class="card_bott m-2" (click)="openPopUp(slide)">
-              <img
-                class="card_comic"
-                src="{{ slide?.thumbnail?.path }}.{{
-                  slide?.thumbnail?.extension
-                }}" />
-              <h5 class="text-center">{{ slide.title }}</h5>
-            </div>
-          </ng-template>
-        </ng-container>
-      </owl-carousel-o>
-    </div>
-  </div>
+  <owl-carousel-o [options]="customOptions">
+    <ng-container *ngFor="let slide of AllComics">
+      <ng-template carouselSlide id="slide.id">
+        <div class="card_bott m-2" (click)="openPopUp(slide)">
+          <img
+            class="card_comic"
+            src="{{ slide?.thumbnail?.path }}.{{
+              slide?.thumbnail?.extension
+            }}" />
+          <h5 class="text-center">{{ slide.title }}</h5>
+        </div>
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
 } @else {
   <p>Cargando...</p>
 }

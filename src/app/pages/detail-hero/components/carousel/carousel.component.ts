@@ -15,45 +15,44 @@ import { Character } from 'src/app/types/characters';
 import { Comic } from 'src/app/types/comics';
 import { ModalComponent } from '../modal/modal.component';
 
+const CarouselConfig: OwlOptions = {
+  loop: true,
+  mouseDrag: true,
+  touchDrag: false,
+  pullDrag: false,
+  dots: false,
+  navSpeed: 700,
+  navText: ['', ''],
+  responsive: {
+    0: {
+      items: 1,
+    },
+    400: {
+      items: 5,
+    },
+    740: {
+      items: 10,
+    },
+    940: {
+      items: 10,
+    },
+  },
+  nav: true,
+};
+
 @Component({
   selector: 'carusel-comics',
   standalone: true,
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
-  imports: [
-    CarouselModule,
-    CommonModule,
-    RouterModule,
-  ],
+  imports: [CarouselModule, CommonModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarosuelComicsComponent {
+  customOptions = CarouselConfig;
+
   detail = input.required<Character>();
 
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1,
-      },
-      400: {
-        items: 5,
-      },
-      740: {
-        items: 10,
-      },
-      940: {
-        items: 10,
-      },
-    },
-    nav: true,
-  };
   AllComics = signal<Comic[] | null>(null);
 
   charactersService = inject(CharactersService);
@@ -73,7 +72,7 @@ export class CarosuelComicsComponent {
     const title = 'Heros';
     const dialogRef: MatDialogRef<any> = this.dialog.open(ModalComponent, {
       width: '1080px',
-      disableClose: true,
+      disableClose: false,
       data: { title: title, payload: data },
     });
     dialogRef.afterClosed().subscribe(res => {

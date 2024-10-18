@@ -8,7 +8,11 @@
         <info-hero [detail]="detail" />
       </div>
     </div>
-    <carusel-comics [detail]="detail"></carusel-comics>
+    <div class="row mt-4">
+      <div class="col-12">
+        <carusel-comics [detail]="detail"></carusel-comics>
+      </div>
+    </div>
   } @else {
     <p>Cargando...</p>
   }
