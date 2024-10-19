@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {
   catchError,
   debounceTime,
@@ -8,7 +8,11 @@ import {
   retry,
   throwError,
 } from 'rxjs';
-import { allCharactersResponse, Character, DataResponse } from '../types/characters';
+import {
+  allCharactersResponse,
+  Character,
+  DataResponse,
+} from '../types/characters';
 import { allComicResponse, Comic } from '../types/comics';
 
 const BASE_API = 'https://gateway.marvel.com/v1/public/characters';
@@ -21,9 +25,22 @@ const API_KEY =
 export class CharactersService {
   http = inject(HttpClient);
 
-  getAllCharacters(limit: number, offset: number): Observable<DataResponse> {
-    const endpoint = `${BASE_API}?ts=1&apikey=${API_KEY}&limit=${limit}&offset=${offset}`;
-    return this.http.get<allCharactersResponse>(endpoint).pipe(
+  getAllCharacters(
+    limit: number,
+    offset: number,
+    nameStartsWith: string
+  ): Observable<DataResponse> {
+    const endpoint = `${BASE_API}?ts=1&apikey=${API_KEY}`;
+
+    let params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('limit', limit.toString());
+
+    if (nameStartsWith && nameStartsWith.length > 0) {
+      params = params.set('nameStartsWith', nameStartsWith);
+    }
+
+    return this.http.get<allCharactersResponse>(endpoint, { params }).pipe(
       debounceTime(300),
       retry(1),
       map(p => p.data),
