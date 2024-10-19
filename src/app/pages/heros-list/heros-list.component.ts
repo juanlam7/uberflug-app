@@ -41,7 +41,11 @@ export class HerosListComponent {
   constructor() {
     effect(cleanUp => {
       const subscription = this.charactersService
-        .getAllCharacters(this.limit(), this.offset(), this.InputFieldSearchValue())
+        .getAllCharacters(
+          this.limit(),
+          this.offset(),
+          this.InputFieldSearchValue()
+        )
         .subscribe(p => {
           this.total.set(p.total);
           this.allCharacters.update(val =>

@@ -2,7 +2,7 @@
   <div>
     @if (allCharacters()) {
       <div class="row">
-        <search-field [InputSearch]="InputFieldSearchValue" />
+        <search-field [InputSearch]="InputFieldSearchValue" [Offset]="offset" [CharactersList]="allCharacters" />
         <sort-button [charactersList]="allCharacters" />
         <grid-list [charactersList]="allCharacters()" [InputSearch]="InputFieldSearchValue()" />
       </div>
