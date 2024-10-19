@@ -3,13 +3,15 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { RouterModule } from '@angular/router';
 
 import { MenuModalComponent } from './menu-modal/menu-modal.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-top-toolbar',
   standalone: true,
   templateUrl: './top-toolbar.component.html',
   styleUrls: ['./top-toolbar.component.scss'],
-  imports: [MatDialogModule, RouterModule]
+  imports: [MatDialogModule, RouterModule, MatIconModule, MatButtonModule]
 })
 export class TopToolbarComponent {
 
@@ -24,7 +26,7 @@ export class TopToolbarComponent {
     const title = 'Menu'
     const dialogRef: MatDialogRef<any> = this.dialog.open(MenuModalComponent, {
       width: '360px',
-      height: '400px',
+      height: '250px',
       position: {
         top: '70px',
         right: '90px'

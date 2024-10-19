@@ -19,7 +19,6 @@ import { InfoHeroComponent } from './components/info/info.component';
   templateUrl: './detail-hero.component.html',
   imports: [
     CommonModule,
-    CarosuelComicsComponent,
     ImageHeroComponent,
     InfoHeroComponent,
     CarosuelComicsComponent,

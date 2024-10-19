@@ -5,10 +5,14 @@
     color: red;
 }
 
-.carousel-item img {
-    max-height: 100px; /* Adjust height as needed */
-    object-fit: cover; /* Ensures images cover the area */
-    border-radius: 15px;
-    max-height: 35em;
-    max-width: 25em;
+img {
+    padding: 1rem;
+    border-radius: 2rem;
+    max-height: 14rem; 
+    min-height: 14rem; 
+    object-fit: cover;
+}
+
+p {
+    margin-inline: 1rem;
 }

@@ -3,23 +3,14 @@
   <a class="redirect_comics" [routerLink]="['/comics-list', detail().id]">
     Comics By hero
   </a>
-  
-  <div id="carouselExample" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="row">
-          <div class="col" *ngFor="let item of AllComics.slice(0, 10)">
-            <img
-              src="{{ item?.thumbnail?.path }}.{{
-                item?.thumbnail?.extension
-              }}"
-              class="d-block w-100"
-              alt="..."
-              style="width: 100%" (click)="openPopUp(item)" />
-              <h5 class="text-center">{{ item.title }}</h5>
-          </div>
-        </div>
-      </div>
+
+  <div class="row">
+    <div class="col d-inline-block overflow-hidden text-truncate p-0" *ngFor="let item of AllComics.slice(0, 10)">
+      <img
+        src="{{ item?.thumbnail?.path }}.{{ item?.thumbnail?.extension }}"
+        alt="..."
+        (click)="openPopUp(item)" />
+      <p class="text-center">{{ item.title }}</p>
     </div>
   </div>
 } @else {
