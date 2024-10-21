@@ -45,13 +45,22 @@ export class ComicsComponent {
 
   seeMore = signal<boolean>(false);
 
+  limit = signal<number>(12);
+  offset = signal<number>(0);
+  total = signal<number>(0);
+
   constructor() {
     const id = this.router.snapshot.paramMap.get('id');
     effect(cleanUp => {
       if (id) {
         const subscription = this.charactersService
-          .getComicsByCharacter(parseInt(id))
-          .subscribe(p => this.AllComics.set(p));
+          .getComicsByCharacter(parseInt(id), this.limit(), this.offset())
+          .subscribe(p => {
+            this.total.set(p.total);
+            this.AllComics.update(val =>
+              val ? [...val, ...p.results] : p.results
+            );
+          });
 
         cleanUp(() => subscription.unsubscribe());
       }
@@ -59,6 +68,8 @@ export class ComicsComponent {
   }
 
   onNearEndScroll(): void {
-    console.log('LLEGO AL FINAL');
+    if (this.offset() < this.total()) {
+      this.offset.update(oldvalue => oldvalue + 12);
+    }
   }
 }

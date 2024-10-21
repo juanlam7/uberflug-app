@@ -13,7 +13,7 @@ import {
   Character,
   DataResponse,
 } from '../types/characters';
-import { allComicResponse, Comic } from '../types/comics';
+import { allComicResponse, DataResponseComic } from '../types/comics';
 
 const BASE_API = 'https://gateway.marvel.com/v1/public/characters';
 const API_KEY =
@@ -57,11 +57,19 @@ export class CharactersService {
     );
   }
 
-  getComicsByCharacter(characterId: number): Observable<Comic[]> {
-    const endpoint = `${BASE_API}/${characterId}/comics?ts=1&apikey=${API_KEY}&limit=12`;
-    return this.http.get<allComicResponse>(endpoint).pipe(
+  getComicsByCharacter(
+    characterId: number,
+    limit: number,
+    offset: number
+  ): Observable<DataResponseComic> {
+    const endpoint = `${BASE_API}/${characterId}/comics?ts=1&apikey=${API_KEY}`;
+    let params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('limit', limit.toString());
+
+    return this.http.get<allComicResponse>(endpoint, { params }).pipe(
       retry(1),
-      map(p => p.data.results),
+      map(p => p.data),
       catchError(this.handleError)
     );
   }

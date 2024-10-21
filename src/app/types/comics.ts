@@ -6,10 +6,10 @@ export interface allComicResponse {
     attributionText: string
     attributionHTML: string
     etag: string
-    data: DataResponse
+    data: DataResponseComic
 }
 
-export interface DataResponse {
+export interface DataResponseComic {
     offset: number
     limit: number
     total: number

@@ -22,7 +22,6 @@ import { Comic } from 'src/app/types/comics';
           </div>
         }
       }
-      >
     </div>
   `,
   styles: `
