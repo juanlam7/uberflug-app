@@ -33,14 +33,17 @@ export class DetailHeroComponent {
 
   constructor() {
     const id = this.router.snapshot.paramMap.get('id');
-    effect(cleanUp => {
-      const subscription = this.charactersService
-        .getDetailCharacter(id)
-        .subscribe(p => this.detail.set(p[0]));
+    effect(
+      cleanUp => {
+        const subscription = this.charactersService
+          .getDetailCharacter(id)
+          .subscribe(p => this.detail.set(p[0]));
 
-      cleanUp(() => {
-        subscription.unsubscribe();
-      });
-    });
+        cleanUp(() => {
+          subscription.unsubscribe();
+        });
+      },
+      { allowSignalWrites: true }
+    );
   }
 }

@@ -51,20 +51,23 @@ export class ComicsComponent {
 
   constructor() {
     const id = this.router.snapshot.paramMap.get('id');
-    effect(cleanUp => {
-      if (id) {
-        const subscription = this.charactersService
-          .getComicsByCharacter(parseInt(id), this.limit(), this.offset())
-          .subscribe(p => {
-            this.total.set(p.total);
-            this.AllComics.update(val =>
-              val ? [...val, ...p.results] : p.results
-            );
-          });
+    effect(
+      cleanUp => {
+        if (id) {
+          const subscription = this.charactersService
+            .getComicsByCharacter(parseInt(id), this.limit(), this.offset())
+            .subscribe(p => {
+              this.total.set(p.total);
+              this.AllComics.update(val =>
+                val ? [...val, ...p.results] : p.results
+              );
+            });
 
-        cleanUp(() => subscription.unsubscribe());
-      }
-    });
+          cleanUp(() => subscription.unsubscribe());
+        }
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   onNearEndScroll(): void {

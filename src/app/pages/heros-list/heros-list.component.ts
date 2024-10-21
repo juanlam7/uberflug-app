@@ -39,22 +39,25 @@ export class HerosListComponent {
   InputFieldSearchValue = signal<string>('');
 
   constructor() {
-    effect(cleanUp => {
-      const subscription = this.charactersService
-        .getAllCharacters(
-          this.limit(),
-          this.offset(),
-          this.InputFieldSearchValue()
-        )
-        .subscribe(p => {
-          this.total.set(p.total);
-          this.allCharacters.update(val =>
-            val ? [...val, ...p.results] : p.results
-          );
-        });
+    effect(
+      cleanUp => {
+        const subscription = this.charactersService
+          .getAllCharacters(
+            this.limit(),
+            this.offset(),
+            this.InputFieldSearchValue()
+          )
+          .subscribe(p => {
+            this.total.set(p.total);
+            this.allCharacters.update(val =>
+              val ? [...val, ...p.results] : p.results
+            );
+          });
 
-      cleanUp(() => subscription.unsubscribe());
-    });
+        cleanUp(() => subscription.unsubscribe());
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   onNearEndScroll(): void {
