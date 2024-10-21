@@ -28,12 +28,5 @@ export const routes: Routes = [
         c => c.HerosListFavComponent
       ),
   },
-  {
-    path: 'comics-list/:id',
-    loadComponent: () =>
-      import('./pages/comics-by-hero/comics-by-hero.component').then(
-        c => c.ComicsByHeroComponent
-      ),
-  },
   { path: '**', redirectTo: 'heros-list' },
 ];

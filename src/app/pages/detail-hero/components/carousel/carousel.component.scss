@@ -5,7 +5,7 @@
     color: red;
 }
 
-img {
+.img-carousel {
     padding: 1rem;
     border-radius: 2rem;
     max-height: 14rem; 
@@ -15,4 +15,13 @@ img {
 
 p {
     margin-inline: 1rem;
+}
+
+.card_imgde{
+    width: 100%;
+    border-radius: 15px;
+    min-width: 100%;
+    min-height: 25em;
+    max-height: 25em;
+    object-fit: cover;
 }

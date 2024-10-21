@@ -4,40 +4,64 @@ import {
   Component,
   effect,
   inject,
-  input,
   signal,
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute } from '@angular/router';
 import { CharactersService } from 'src/app/services/characters.service';
-import { Character } from 'src/app/types/characters';
 import { Comic } from 'src/app/types/comics';
+import { ScrollNearEndDirective } from 'src/app/utils/directives/scroll-near-end.directive';
 import { ModalComponent } from '../modal/modal.component';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'carusel-comics',
   standalone: true,
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    ScrollNearEndDirective,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('fade', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [animate('300ms', style({ opacity: 0 }))]),
+    ]),
+  ],
 })
 export class CarosuelComicsComponent {
-  detail = input.required<Character>();
-
   AllComics = signal<Comic[] | null>(null);
 
   charactersService = inject(CharactersService);
   dialog = inject(MatDialog);
+  router = inject(ActivatedRoute);
+
+  seeMore = signal<boolean>(false);
 
   constructor() {
+    const id = this.router.snapshot.paramMap.get('id');
     effect(cleanUp => {
-      const subscription = this.charactersService
-        .getComictsByCharacter(this.detail().comics.collectionURI)
-        .subscribe(p => this.AllComics.set(p));
+      if (id) {
+        const subscription = this.charactersService
+          .getComicsByCharacter(parseInt(id))
+          .subscribe(p => this.AllComics.set(p));
 
-      cleanUp(() => subscription.unsubscribe());
+        cleanUp(() => subscription.unsubscribe());
+      }
     });
+  }
+
+  toggleSeeMoreButton() {
+    this.seeMore.update(val => !val);
   }
 
   openPopUp(data: any = []) {
@@ -53,5 +77,9 @@ export class CarosuelComicsComponent {
       }
       console.log(res);
     });
+  }
+
+  onNearEndScroll(): void {
+    console.log('LLEGO AL FINAL');
   }
 }
