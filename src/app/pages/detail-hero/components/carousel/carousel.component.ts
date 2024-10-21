@@ -8,8 +8,8 @@ import {
   signal,
 } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { RouterModule } from '@angular/router';
-import { CharactersService } from 'src/app/services/characters.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ComicsService } from 'src/app/services/comics.service';
 import { Character } from 'src/app/types/characters';
 import { Comic } from 'src/app/types/comics';
 import { ModalComponent } from '../modal/modal.component';
@@ -23,21 +23,25 @@ import { ModalComponent } from '../modal/modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarosuelComicsComponent {
-  detail = input.required<Character>();
-
   AllComics = signal<Comic[] | null>(null);
 
-  charactersService = inject(CharactersService);
+  comicsService = inject(ComicsService);
   dialog = inject(MatDialog);
+  router = inject(ActivatedRoute);
+  id = this.router.snapshot.paramMap.get('id');
 
   constructor() {
-    effect(cleanUp => {
-      const subscription = this.charactersService
-        .getComictsByCharacter(this.detail().comics.collectionURI)
-        .subscribe(p => this.AllComics.set(p));
-
-      cleanUp(() => subscription.unsubscribe());
-    });
+    effect(
+      () => {
+        if (this.id) {
+          this.comicsService.setCharacterId(parseInt(this.id));
+          this.AllComics.set(this.comicsService.ComicsList());
+        }
+      },
+      {
+        allowSignalWrites: true,
+      }
+    );
   }
 
   openPopUp(data: any = []) {

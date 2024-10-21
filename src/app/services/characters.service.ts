@@ -57,8 +57,8 @@ export class CharactersService {
     );
   }
 
-  getComictsByCharacter(url: string): Observable<Comic[]> {
-    const endpoint = `${url}?ts=1&apikey=${API_KEY}&limit=12`;
+  getComicsByCharacter(characterId: number): Observable<Comic[]> {
+    const endpoint = `${BASE_API}/${characterId}/comics?ts=1&apikey=${API_KEY}&limit=12`;
     return this.http.get<allComicResponse>(endpoint).pipe(
       retry(1),
       map(p => p.data.results),

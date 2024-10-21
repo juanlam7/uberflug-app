@@ -1,18 +1,24 @@
-<p>Comics by heros</p>
-
-<div
-  class="col d-flex align-items-center justify-content-center"
-  style="min-height: 550px">
-  <div class="row">
-    <div class="col-12">
-      <div class="text-center">
-        <div class="spinner-grow" role="status"></div>
-      </div>
+<div class="container-fluid p-5">
+  @if (comicsList(); as comicsList) {
+    <div class="row mt-3">
+      @for (item of comicsList; track item.id) {
+        @defer (on viewport) {
+          <div class="col-2 mt-3 mb-3">
+            <!-- create component for comics cards -->
+            <img
+              src="{{ item?.thumbnail?.path }}.{{ item?.thumbnail?.extension }}"
+              alt="..." />
+            <p class="text-center">{{ item.title }}</p>
+          </div>
+        } @placeholder {
+          <div class="col-2 mt-3 mb-3">
+            <!-- add skeleton here while image hero is loading -->
+            <div>loading...</div>
+          </div>
+        }
+      }
     </div>
-    <div class="col-12 p-5">
-      <div class="text-center">
-        <p>Iniciando...</p>
-      </div>
-    </div>
-  </div>
+  } @else {
+    <p>Cargando...</p>
+  }
 </div>
