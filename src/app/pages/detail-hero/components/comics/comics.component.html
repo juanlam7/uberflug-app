@@ -1,0 +1,15 @@
+@if (AllComics(); as AllComics) {
+  <see-more [seeMore]="seeMore" />
+
+  @if (seeMore()) {
+    <div appScrollNearEnd (nearEnd)="onNearEndScroll()" @fade>
+      <grid-list [AllComics]="AllComics" />
+    </div>
+  } @else {
+    <div @fade>
+      <carousel [AllComics]="AllComics" />
+    </div>
+  }
+} @else {
+  <p>Cargando...</p>
+}

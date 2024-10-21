@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CharactersService } from 'src/app/services/characters.service';
 import { Character } from 'src/app/types/characters';
-import { CarosuelComicsComponent } from './components/carousel/carousel.component';
+import { ComicsComponent } from './components/comics/comics.component';
 import { ImageHeroComponent } from './components/image/image.component';
 import { InfoHeroComponent } from './components/info/info.component';
 
@@ -21,7 +21,7 @@ import { InfoHeroComponent } from './components/info/info.component';
     CommonModule,
     ImageHeroComponent,
     InfoHeroComponent,
-    CarosuelComicsComponent,
+    ComicsComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -2,67 +2,56 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   inject,
-  signal,
+  input,
 } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
-import { CharactersService } from 'src/app/services/characters.service';
 import { Comic } from 'src/app/types/comics';
-import { ScrollNearEndDirective } from 'src/app/utils/directives/scroll-near-end.directive';
 import { ModalComponent } from '../modal/modal.component';
-import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'carusel-comics',
+  selector: 'carousel',
   standalone: true,
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss'],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatButtonModule,
-    ScrollNearEndDirective,
-  ],
+  template: `
+    @if (AllComics(); as AllComics) {
+      <div class="row">
+        @for (item of AllComics.slice(0, 10); track item.id) {
+          @defer (on viewport) {
+            <div class="col d-inline-block overflow-hidden text-truncate p-0">
+              <img
+                class="img-carousel"
+                src="{{ item?.thumbnail?.path }}.{{
+                  item?.thumbnail?.extension
+                }}"
+                alt="..."
+                (click)="openPopUp(item)" />
+              <p class="text-center">{{ item.title }}</p>
+            </div>
+          } @placeholder {
+            <div class="col-2 mt-3 mb-3">
+              <div>cargando...</div>
+            </div>
+          }
+        }
+      </div>
+    }
+  `,
+  styles: `
+    .img-carousel {
+      padding: 1rem;
+      border-radius: 2rem;
+      max-height: 14rem;
+      min-height: 14rem;
+      object-fit: cover;
+    }
+  `,
+  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('fade', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [animate('300ms', style({ opacity: 0 }))]),
-    ]),
-  ],
 })
-export class CarosuelComicsComponent {
-  AllComics = signal<Comic[] | null>(null);
+export class CarouselComponent {
+  AllComics = input.required<Comic[] | null>();
 
-  charactersService = inject(CharactersService);
   dialog = inject(MatDialog);
-  router = inject(ActivatedRoute);
-
-  seeMore = signal<boolean>(false);
-
-  constructor() {
-    const id = this.router.snapshot.paramMap.get('id');
-    effect(cleanUp => {
-      if (id) {
-        const subscription = this.charactersService
-          .getComicsByCharacter(parseInt(id))
-          .subscribe(p => this.AllComics.set(p));
-
-        cleanUp(() => subscription.unsubscribe());
-      }
-    });
-  }
-
-  toggleSeeMoreButton() {
-    this.seeMore.update(val => !val);
-  }
 
   openPopUp(data: any = []) {
     const title = 'Heros';
@@ -77,9 +66,5 @@ export class CarosuelComicsComponent {
       }
       console.log(res);
     });
-  }
-
-  onNearEndScroll(): void {
-    console.log('LLEGO AL FINAL');
   }
 }
