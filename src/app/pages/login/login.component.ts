@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
+import { InputFieldComponent } from './components/input.component';
 
 @Component({
   selector: 'login',
@@ -15,63 +20,38 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   imports: [
-    MatFormFieldModule,
     CommonModule,
     MatInputModule,
-    FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatIconModule
-  ]
+    InputFieldComponent,
+  ],
 })
 export class LoginComponent implements OnInit {
+  isLoading = false;
 
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]),
-  });
+  loginForm!: FormGroup;
+  emailControl!: FormControl;
+  passwordlControl!: FormControl;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    });
+
+    this.emailControl = this.loginForm.get('email') as FormControl;
+    this.passwordlControl = this.loginForm.get('password') as FormControl;
   }
 
   async onLogin() {
     const { email, password } = this.loginForm.value;
-    try {
-      const user = await this.authService.login(email ?? '', password ?? '');
-      if (user) {
-        localStorage.setItem('Token', 'yet8retj')
-        this.router.navigate(['/auth'])
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async onGoogleLogin() {
-    try {
-      const user = await this.authService.loginGoogle();
-      if (user) {
-        localStorage.setItem('Token', 'yet8retj')
-        console.log('Funcionó Google!');
-        this.router.navigate(['/auth'])
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async onFacebookLogin() {
-    try {
-      const user = await this.authService.loginFacebook();
-      if (user) {
-        localStorage.setItem('Token', 'yet8retj')
-        console.log('Funcionó Facebook!');
-        this.router.navigate(['/auth'])
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    console.log('Email and password', email, password);
   }
 }
