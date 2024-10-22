@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Comic } from 'src/app/types/comics';
+import { Comic } from 'src/app/models/comics';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({

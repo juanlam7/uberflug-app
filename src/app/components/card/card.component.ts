@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
-import { Character } from 'src/app/types/characters';
+import { Character } from 'src/app/models/characters';
 import { FavoriteComponent } from '../favorite-btn/favorite.component';
 
 @Component({
-  selector: 'app-card',
+  selector: 'card',
   standalone: true,
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],

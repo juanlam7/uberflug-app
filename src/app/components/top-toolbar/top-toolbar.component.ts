@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-top-toolbar',
+  selector: 'top-toolbar',
   standalone: true,
   templateUrl: './top-toolbar.component.html',
   styleUrls: ['./top-toolbar.component.scss'],

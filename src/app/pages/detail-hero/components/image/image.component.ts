@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Character } from 'src/app/types/characters';
+import { Character } from 'src/app/models/characters';
 
 @Component({
   selector: 'image-hero',

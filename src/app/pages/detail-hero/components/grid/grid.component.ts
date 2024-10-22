@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Comic } from 'src/app/types/comics';
+import { Comic } from 'src/app/models/comics';
 
 @Component({
   selector: 'grid-list',

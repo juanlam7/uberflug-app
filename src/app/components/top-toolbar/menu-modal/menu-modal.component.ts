@@ -9,7 +9,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-menu-modal',
+  selector: 'menu-modal',
   standalone: true,
   templateUrl: './menu-modal.component.html',
   imports: [

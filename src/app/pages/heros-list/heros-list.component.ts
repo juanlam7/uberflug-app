@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { CharactersService } from 'src/app/services/characters.service';
-import { Character } from 'src/app/types/characters';
+import { Character } from 'src/app/models/characters';
 import { ScrollNearEndDirective } from 'src/app/utils/directives/scroll-near-end.directive';
 import { GridComponent } from './components/grid/grid.component';
 import { SearchComponent } from './components/search/search.component';

@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import moment from 'moment';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'modal',
   standalone: true,
   templateUrl: './modal.component.html',
   imports: [MatIconModule, MatDialogModule],

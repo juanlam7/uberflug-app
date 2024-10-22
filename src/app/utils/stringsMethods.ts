@@ -1,9 +1,9 @@
-import { orderArr } from '../types/common';
+export type orderArr = 'asc' | 'desc';
 
 type arrType = { name: string } & any;
 
 export function sortArrayByName(arr: arrType[], order: orderArr): arrType[] {
-  const copyArr = [...arr]
+  const copyArr = [...arr];
   return copyArr.sort((a, b) => {
     return order === 'asc'
       ? a.name.localeCompare(b.name)

@@ -1,19 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import {
-  catchError,
-  debounceTime,
-  map,
-  Observable,
-  retry,
-  throwError,
-} from 'rxjs';
+import { debounceTime, map, Observable, retry } from 'rxjs';
 import {
   allCharactersResponse,
   Character,
   DataResponse,
-} from '../types/characters';
-import { allComicResponse, DataResponseComic } from '../types/comics';
+} from '../models/characters';
+import { allComicResponse, DataResponseComic } from '../models/comics';
 
 const BASE_API = 'https://gateway.marvel.com/v1/public/characters';
 const API_KEY =
@@ -43,8 +36,7 @@ export class CharactersService {
     return this.http.get<allCharactersResponse>(endpoint, { params }).pipe(
       debounceTime(300),
       retry(1),
-      map(p => p.data),
-      catchError(this.handleError)
+      map(p => p.data)
     );
   }
 
@@ -52,8 +44,7 @@ export class CharactersService {
     const endpoint = `${BASE_API}/${id}?ts=1&apikey=${API_KEY}`;
     return this.http.get<allCharactersResponse>(endpoint).pipe(
       retry(1),
-      map(p => p.data.results),
-      catchError(this.handleError)
+      map(p => p.data.results)
     );
   }
 
@@ -69,21 +60,7 @@ export class CharactersService {
 
     return this.http.get<allComicResponse>(endpoint, { params }).pipe(
       retry(1),
-      map(p => p.data),
-      catchError(this.handleError)
+      map(p => p.data)
     );
-  }
-
-  handleError(error: any) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    window.alert(errorMessage);
-    return throwError(() => {
-      return errorMessage;
-    });
   }
 }

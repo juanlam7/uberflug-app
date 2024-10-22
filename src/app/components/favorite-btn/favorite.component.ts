@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { Character } from 'src/app/types/characters';
+import { Character } from 'src/app/models/characters';
 
 @Component({
   selector: 'favorite-btn',

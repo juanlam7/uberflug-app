@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { CardComponent } from 'src/app/components/card/card.component';
-import { Character } from 'src/app/types/characters';
+import { Character } from 'src/app/models/characters';
 import { CharacterFilter } from '../../../../utils/pipes/characterFilter.pipe';
 
 @Component({
@@ -15,7 +15,7 @@ import { CharacterFilter } from '../../../../utils/pipes/characterFilter.pipe';
       ) {
         @defer (on viewport) {
           <div class="col-2 mt-3 mb-3">
-            <app-card [item]="item"></app-card>
+            <card [item]="item"></card>
           </div>
         } @placeholder {
           <div class="col-2 mt-3 mb-3">

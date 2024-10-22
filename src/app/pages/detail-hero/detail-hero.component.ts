@@ -8,13 +8,13 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CharactersService } from 'src/app/services/characters.service';
-import { Character } from 'src/app/types/characters';
+import { Character } from 'src/app/models/characters';
 import { ComicsComponent } from './components/comics/comics.component';
 import { ImageHeroComponent } from './components/image/image.component';
 import { InfoHeroComponent } from './components/info/info.component';
 
 @Component({
-  selector: 'app-detail-hero',
+  selector: 'detail-hero',
   standalone: true,
   templateUrl: './detail-hero.component.html',
   imports: [

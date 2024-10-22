@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CharactersService } from 'src/app/services/characters.service';
-import { Comic } from 'src/app/types/comics';
+import { Comic } from 'src/app/models/comics';
 import { ScrollNearEndDirective } from 'src/app/utils/directives/scroll-near-end.directive';
 import { GridComponent } from '../grid/grid.component';
 import { SeeMoreComponent } from '../see-more/see-more.component';
