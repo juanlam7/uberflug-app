@@ -1,18 +1,16 @@
 <p>Heros List Favs</p>
-
-<div
-  class="col d-flex align-items-center justify-content-center"
-  style="min-height: 550px">
-  <div class="row">
-    <div class="col-12">
-      <div class="text-center">
-        <div class="spinner-grow" role="status"></div>
-      </div>
-    </div>
-    <div class="col-12 p-5">
-      <div class="text-center">
-        <p>Iniciando...</p>
+@if (favorite(); as favorite) {
+  <div
+    class="col d-flex align-items-center justify-content-center"
+    style="min-height: 550px">
+    <div class="row">
+      <div class="col-12 p-5">
+        <div class="text-center">
+          @for (item of favorite; track item.id) {
+            <li>{{ item.name }}</li>
+          }
+        </div>
       </div>
     </div>
   </div>
-</div>
+}
