@@ -5,7 +5,7 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -53,5 +53,10 @@ export class LoginComponent implements OnInit {
   async onLogin() {
     const { email, password } = this.loginForm.value;
     console.log('Email and password', email, password);
+
+    this.authService.login(email, password).subscribe(res => {
+      this.router.navigate(['/heros-list']);
+      console.log('Response', res);
+    });
   }
 }

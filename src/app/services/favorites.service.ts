@@ -2,10 +2,15 @@ import { inject, Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 
-export interface HeroInfo {
+interface IHeroResponse {
   id: string;
   name: string;
   heroId: number;
+  __typename: string;
+}
+
+interface IGetFavorite {
+  allFavorites: IHeroResponse[];
 }
 
 @Injectable({
@@ -14,9 +19,9 @@ export interface HeroInfo {
 export class FavoritesService {
   private readonly apollo = inject(Apollo);
 
-  getFavorite(): Observable<HeroInfo[]> {
+  getFavorite(): Observable<IHeroResponse[]> {
     return this.apollo
-      .watchQuery<any>({
+      .watchQuery<IGetFavorite>({
         query: gql`
           query AllFavoritesByUser {
             allFavorites {
