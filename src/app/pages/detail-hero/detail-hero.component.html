@@ -1,0 +1,19 @@
+<div class="container-fluid p-5">
+  @if (detail(); as detail) {
+    <div class="row mt-3">
+      <div class="col-8">
+        <image-hero [detail]="detail" />
+      </div>
+      <div class="col-4">
+        <info-hero [detail]="detail" />
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <comics />
+      </div>
+    </div>
+  } @else {
+    <p>Cargando...</p>
+  }
+</div>

@@ -1,17 +1,18 @@
-<nav class="navbar navbar-light justify-content-between mt-3">
-    <div class="ms-5">
-        <a (click)="changeView('init')">
-            <img id="head" src="../../../assets/images/Subtraction.svg"/>
-        </a>
+<nav class="navbar navbar-light justify-content-between mt-1">
+  <div class="ms-5">
+    <a [routerLink]="['']">
+      <img id="head" src="../../../assets/images/Subtraction.svg" />
+    </a>
+  </div>
+  <div class="row p-0 m-0 align-items-center">
+    <div class="col">
+      <button mat-fab extended color="warn" (click)="openPopUp()">
+        <mat-icon>menu</mat-icon>
+        Menu
+      </button>
     </div>
-    <div class="me-5">
-        <div class="row">
-            <div class="col">
-                <button class="btn btn-link" (click)="openPopUp()">Menu  <img src="../../../assets/icons/burger menu.svg" class="icon_menu" alt="Bootstrap" width="20" height="20"></button>
-            </div>
-            <div class="col">
-                <p class="nav-link"> {{ userData?.email }}</p>
-            </div>
-        </div>
+    <div class="col">
+      <p class="btn btn-link mb-0">{{ userData.email }}</p>
     </div>
+  </div>
 </nav>

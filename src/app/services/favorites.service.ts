@@ -1,30 +1,84 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { inject, Injectable } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
+import { map, Observable } from 'rxjs';
+
+const getAllFavoriteSchema = gql`
+  query AllFavoritesByUser {
+    allFavorites {
+      id
+      name
+      heroId
+      image
+    }
+  }
+`;
+
+export interface IHeroResponse {
+  id: string;
+  name: string;
+  heroId: number;
+  image: string;
+  __typename: string;
+}
+
+interface IGetFavorite {
+  allFavorites: IHeroResponse[];
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FavoritesService {
+  private readonly apollo = inject(Apollo);
 
-  constructor(public firestore: AngularFirestore) { }
-
-  getFavorite() { 
-    //return this.firestore.collection("favorites").valueChanges();
-    return this.firestore.collection("favorites").snapshotChanges();
+  getFavorite(): Observable<IHeroResponse[]> {
+    return this.apollo
+      .watchQuery<IGetFavorite>({
+        query: getAllFavoriteSchema,
+      })
+      .valueChanges.pipe(map(res => res.data.allFavorites));
   }
 
-  createFavorite(data: any) {
-    return new Promise<any>((resolve, reject) =>{
-        this.firestore
-            .collection("favorites")
-            .add(data)
-            .then(res => {resolve(res)}, err => reject(err));
+  createFavorite(heroId: number, name: string, image: string) {
+    return this.apollo.mutate<any>({
+      mutation: gql`
+        mutation AddFavorite($heroId: Float!, $name: String!, $image: String!) {
+          addFavorite(heroId: $heroId, name: $name, image: $image) {
+            id
+            name
+            image
+            heroId
+          }
+        }
+      `,
+      variables: {
+        heroId,
+        name,
+        image,
+      },
+      refetchQueries: [
+        {
+          query: getAllFavoriteSchema,
+        },
+      ],
     });
   }
-  deleteFavorite(id: any) {
-    return this.firestore
-        .collection("favorites")
-        .doc(id)
-        .delete();
+
+  deleteFavorite(heroId: number) {
+    return this.apollo.mutate<any>({
+      mutation: gql`
+        mutation DeleteFavorite($heroId: Float!) {
+          deleteFavorite(heroId: $heroId)
+        }
+      `,
+      variables: {
+        heroId,
+      },
+      refetchQueries: [
+        {
+          query: getAllFavoriteSchema,
+        },
+      ],
+    });
   }
 }

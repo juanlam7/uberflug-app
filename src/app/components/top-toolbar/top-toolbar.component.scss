@@ -1,10 +1,12 @@
 .navbar{
     background: white;
+    position: absolute;
+    width: 100%;
     .btn{
         color: #FF3442;
         text-decoration: none;
         .icon_menu{
-            vertical-align: -.180em;
+            vertical-align: sub;
         }
     }
 }

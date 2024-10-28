@@ -1,8 +1,8 @@
 <div class="container-fluid">
-    <div *ngIf="isLoading">
+    <div>
         <div class="row">
             <div class="col-12">
-                <mat-icon mat-dialog-close aria-hidden="false" style="float: right;" aria-label="Example home icon">close</mat-icon>
+                <mat-icon mat-dialog-close aria-hidden="false" style="float: right; margin-top: 1rem;" aria-label="Example home icon">close</mat-icon>
             </div>
         </div>
         <div class="row mt-3 mb-3">
@@ -14,47 +14,25 @@
         <div class="row">
             <div class="col-12 align-items-center justify-content-center">
                 <mat-list role="list">
-                    <a style="text-decoration: none;">
+                    <a style="text-decoration: none;" [routerLink]="['/favorites-list']">
                         <mat-list-item role="listitem">
-                            <button mat-icon-button (click)="changeView('fav')">
+                            <button mat-icon-button>
                                 <mat-icon matPrefix class="ms-2 me-3" color="warn">favorite</mat-icon>
                                 Personajes favoritos
                             </button>
                         </mat-list-item>
                     </a>
                     <mat-divider></mat-divider>
-                    <a style="text-decoration: none;">
+                    <a style="text-decoration: none;"  [routerLink]="['']">
                         <mat-list-item role="listitem">
-                            <button mat-icon-button (click)="changeView('init')">
+                            <button mat-icon-button>
                                 <mat-icon matPrefix class="ms-2 me-3">home</mat-icon>
                                 Lista de personajes
                             </button>
                         </mat-list-item>
                     </a>
-                    <mat-divider></mat-divider>
-                    <mat-list-item role="listitem">
-                        <mat-icon matPrefix class="ms-2 me-3">account_circle</mat-icon>
-                        Item 1
-                    </mat-list-item>
                 </mat-list>
             </div>
-        </div>
-    </div>
-    <div class="row" *ngIf="!isLoading">
-        <div class="col d-flex align-items-center justify-content-center" style="min-height: 100px;">
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center" >
-                        <div class="spinner-grow" role="status"></div>
-                    </div>
-                </div>
-                <div class="col-12 p-5">
-                    <div class="text-center" >
-                        <p>Cargando...</p>
-                    </div>
-                </div>
-            </div>
-    
         </div>
     </div>
 </div>

@@ -1,36 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FavoritesService } from 'src/app/services/favorites.service';
+import { CommonModule } from '@angular/common';
+import { Component, inject, Input } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+
+import { Character } from 'src/app/models/characters';
+import { IHeroResponse } from 'src/app/services/favorites.service';
+import { FavoriteComponent } from '../favorite-btn/favorite.component';
 
 @Component({
-  selector: 'app-card',
+  selector: 'card',
+  standalone: true,
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
+  imports: [CommonModule, RouterModule, FavoriteComponent],
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
+  @Input() item: Character | null = null;
+  @Input() itemFav: IHeroResponse | null = null;
 
-  @Input() item: any;
-  diffFav: boolean = false;
-
-  constructor(private route: Router, private favoritesService: FavoritesService) { }
-
-  ngOnInit(): void {
-  }
-
-  detalle(id: string) {
-    this.route.navigate(['/auth/detail-hero', id]);
-  }
-
-  favoriteButton(item: any) {
-    this.diffFav === false ? this.diffFav = true : this.diffFav = false;
-    if (item.id_fire){
-      this.favoritesService.deleteFavorite(item.id_fire).then((value) => {
-        delete item.id_fire
-      })
-    } else {
-      this.favoritesService.createFavorite(item).then((value) => {
-        item.id_fire = value.id
-      })
-    }
-  }
+  route = inject(Router);
 }
