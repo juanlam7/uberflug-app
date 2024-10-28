@@ -1,20 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { FavoritesService } from 'src/app/services/favorites.service';
+import { CardComponent } from 'src/app/components/card/card.component';
+import { StoreFavService } from 'src/app/services/storeFav.service';
 
 @Component({
   selector: 'heros-fav-list',
   standalone: true,
   templateUrl: './heros-list-fav.component.html',
   styleUrls: ['./heros-list-fav.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, CardComponent],
 })
 export class HerosListFavComponent {
-  favoritesService = inject(FavoritesService);
-
-  favorite$ = this.favoritesService.getFavorite();
-  favorite = toSignal(this.favorite$, {
-    initialValue: [],
-  });
+  storeFavService = inject(StoreFavService);
 }

@@ -2,10 +2,21 @@ import { inject, Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 
+const getAllFavoriteSchema = gql`
+  query AllFavoritesByUser {
+    allFavorites {
+      id
+      name
+      heroId
+    }
+  }
+`;
+
 interface IHeroResponse {
   id: string;
   name: string;
   heroId: number;
+  image: string;
   __typename: string;
 }
 
@@ -22,27 +33,51 @@ export class FavoritesService {
   getFavorite(): Observable<IHeroResponse[]> {
     return this.apollo
       .watchQuery<IGetFavorite>({
-        query: gql`
-          query AllFavoritesByUser {
-            allFavorites {
-              id
-              name
-              heroId
-            }
-          }
-        `,
+        query: getAllFavoriteSchema,
       })
       .valueChanges.pipe(map(res => res.data.allFavorites));
   }
 
-  createFavorite(data: any) {
-    return new Promise<any>((resolve, reject) => {
-      resolve('res');
+  createFavorite(heroId: number, name: string, image: string) {
+    return this.apollo.mutate<any>({
+      mutation: gql`
+        mutation AddFavorite($heroId: Float!, $name: String!, $image: String!) {
+          addFavorite(heroId: $heroId, name: $name, image: $image) {
+            id
+            name
+            image
+            heroId
+          }
+        }
+      `,
+      variables: {
+        heroId,
+        name,
+        image,
+      },
+      refetchQueries: [
+        {
+          query: getAllFavoriteSchema,
+        },
+      ],
     });
   }
-  deleteFavorite(id: any) {
-    return new Promise<any>((resolve, reject) => {
-      resolve('res');
+
+  deleteFavorite(heroId: number) {
+    return this.apollo.mutate<any>({
+      mutation: gql`
+        mutation DeleteFavorite($heroId: Float!) {
+          deleteFavorite(heroId: $heroId)
+        }
+      `,
+      variables: {
+        heroId,
+      },
+      refetchQueries: [
+        {
+          query: getAllFavoriteSchema,
+        },
+      ],
     });
   }
 }
