@@ -1,11 +1,19 @@
-@if (item) {
+@if (item || itemFav) {
   <div class="card">
-    <favorite-btn [detail]="item" customClass="fav-button--card" />
-    <a [routerLink]="['/detail-hero', item.id]">
-      <img
+    @if (item) {
+      <favorite-btn [detail]="item" customClass="fav-button--card" />
+      <a [routerLink]="['/detail-hero', item.id]">
+        <img
         src="{{ item.thumbnail.path }}.{{ item.thumbnail.extension }}"
         class="card_imgde" />
-      <h3 class="text_img">{{ item.name }}</h3>
-    </a>
+        <h3 class="text_img">{{ item.name }}</h3>
+      </a>
+    } @else {
+      <favorite-btn [detailFav]="itemFav" customClass="fav-button--card" />
+      <a [routerLink]="['/detail-hero', itemFav?.heroId]">
+        <img src="{{ itemFav?.image }}" class="card_imgde" />
+        <h3 class="text_img">{{ itemFav?.name }}</h3>
+      </a>
+    }
   </div>
 }

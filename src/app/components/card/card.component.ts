@@ -3,6 +3,7 @@ import { Component, inject, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { Character } from 'src/app/models/characters';
+import { IHeroResponse } from 'src/app/services/favorites.service';
 import { FavoriteComponent } from '../favorite-btn/favorite.component';
 
 @Component({
@@ -14,15 +15,11 @@ import { FavoriteComponent } from '../favorite-btn/favorite.component';
 })
 export class CardComponent {
   @Input() item: Character | null = null;
+  @Input() itemFav: IHeroResponse | null = null;
 
   route = inject(Router);
 
   detalle(id: number) {
     this.route.navigate(['/detail-hero', id]);
-  }
-
-  favoriteButton(item: Character) {
-    console.log(item);
-    // add logic here to save selected character as favorite
   }
 }

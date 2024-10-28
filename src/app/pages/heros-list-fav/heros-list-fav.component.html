@@ -1,15 +1,11 @@
-@if (storeFavService.favorite(); as favorite) {
-  <div
-    class="col d-flex align-items-center justify-content-center"
-    style="min-height: 550px">
-    <div class="row">
-      <div class="col-12 p-5">
-        <div class="text-center">
-          @for (item of favorite; track item.id) {
-            <li>{{ item.name }}</li>
-          }
+<div class="container-fluid p-5">
+  @if (storeFavService.favorite(); as favorite) {
+    <div class="row mt-3">
+      @for (item of favorite; track item.id) {
+        <div class="col-2 mt-10 mb-3">
+          <card [itemFav]="item"></card>
         </div>
-      </div>
+      }
     </div>
-  </div>
-}
+  }
+</div>

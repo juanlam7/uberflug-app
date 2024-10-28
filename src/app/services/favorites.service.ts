@@ -8,11 +8,12 @@ const getAllFavoriteSchema = gql`
       id
       name
       heroId
+      image
     }
   }
 `;
 
-interface IHeroResponse {
+export interface IHeroResponse {
   id: string;
   name: string;
   heroId: number;

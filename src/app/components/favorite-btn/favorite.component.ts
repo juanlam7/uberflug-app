@@ -10,7 +10,10 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Character } from 'src/app/models/characters';
-import { FavoritesService } from 'src/app/services/favorites.service';
+import {
+  FavoritesService,
+  IHeroResponse,
+} from 'src/app/services/favorites.service';
 import { StoreFavService } from 'src/app/services/storeFav.service';
 
 @Component({
@@ -31,7 +34,8 @@ import { StoreFavService } from 'src/app/services/storeFav.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoriteComponent {
-  detail = input.required<Character | null>();
+  detail = input<Character | null>();
+  detailFav = input<IHeroResponse | null>();
   customClass = input.required<string>();
   favoritesService = inject(FavoritesService);
   storeFavService = inject(StoreFavService);
@@ -44,7 +48,11 @@ export class FavoriteComponent {
         this.isFavorite.set(
           this.storeFavService
             .favorite()
-            .some(item => item.heroId === this.detail()?.id)
+            .some(
+              item =>
+                item.heroId === this.detail()?.id ||
+                item.heroId === this.detailFav()?.heroId
+            )
         );
       },
       { allowSignalWrites: true }
@@ -52,14 +60,20 @@ export class FavoriteComponent {
   }
 
   AddFavoriteBtn() {
-    const { id, name, thumbnail } = this.detail()!;
+    const favoriteId = this.detail()?.id ?? this.detailFav()!.heroId;
+    const favoriteName = this.detail()?.name ?? this.detailFav()!.name;
+    const favoriteImage = this.detail()?.thumbnail.path
+      ? this.detail()?.thumbnail.path + '.' + this.detail()?.thumbnail.extension
+      : this.detailFav()!.image;
+
     this.favoritesService
-      .createFavorite(id, name, thumbnail.path + '.' + thumbnail.extension)
+      .createFavorite(favoriteId, favoriteName, favoriteImage)
       .subscribe();
   }
 
   deleteFavoriteBtn() {
-    const { id } = this.detail()!;
-    this.favoritesService.deleteFavorite(id).subscribe();
+    const favoriteId = this.detail()?.id ?? this.detailFav()!.heroId;
+
+    this.favoritesService.deleteFavorite(favoriteId).subscribe();
   }
 }
