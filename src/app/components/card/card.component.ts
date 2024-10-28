@@ -18,8 +18,4 @@ export class CardComponent {
   @Input() itemFav: IHeroResponse | null = null;
 
   route = inject(Router);
-
-  detalle(id: number) {
-    this.route.navigate(['/detail-hero', id]);
-  }
 }

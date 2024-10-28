@@ -6,10 +6,11 @@ import SpinnerComponent from './components/spinner/spinner.component';
 @Component({
   selector: 'app-root',
   standalone: true,
+  template: `
+    <top-toolbar />
+    <router-outlet />
+    <spinner />
+  `,
   imports: [RouterOutlet, TopToolbarComponent, SpinnerComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'uberflug-app';
-}
+export class AppComponent {}

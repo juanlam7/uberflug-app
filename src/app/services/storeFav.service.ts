@@ -1,6 +1,6 @@
-import { effect, inject, Injectable, signal } from '@angular/core';
-import { FavoritesService } from './favorites.service';
+import { inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { FavoritesService } from './favorites.service';
 
 @Injectable({
   providedIn: 'root',
