@@ -17,22 +17,26 @@ import { Character } from 'src/app/models/characters';
   selector: 'search-field',
   standalone: true,
   template: `
-    <mat-form-field class="form-field" appearance="fill">
-      <mat-label>Search</mat-label>
-      <input
-        matInput
-        type="text"
-        [(ngModel)]="InputSearch"
-        (input)="onSearchInput($event)" />
-      <button
-        *ngIf="InputSearch()"
-        matSuffix
-        mat-icon-button
-        aria-label="Clear"
-        (click)="this.resetToInitialValues()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </mat-form-field>
+    <div class="relative w-fit">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label class="text-gray-700">Search</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="InputSearch"
+          (input)="onSearchInput($event)"
+          class="border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500" />
+        <button
+          *ngIf="InputSearch()"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="this.resetToInitialValues()"
+          class="absolute right-2 top-1/2 transform -translate-y-1/2">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
   `,
   imports: [
     CommonModule,

@@ -6,19 +6,22 @@ import { Comic } from 'src/app/models/comics';
   selector: 'grid-list',
   standalone: true,
   template: `
-    <div class="row">
+    <div class="flex flex-wrap -mx-2">
       @for (item of AllComics(); track item.id) {
         @defer (on viewport) {
-          <div class="col-2 mt-3 mb-3">
+          <div class="w-1/6 px-2 mt-3 mb-3">
             <img
-              class="card_imgde"
+              class="w-full h-auto rounded"
               src="{{ item?.thumbnail?.path }}.{{ item?.thumbnail?.extension }}"
               alt="..." />
-            <p class="text-center">{{ item.title }}</p>
+            <p class="text-center mt-1 text-sm font-medium">{{ item.title }}</p>
           </div>
         } @placeholder {
-          <div class="col-2 mt-3 mb-3">
-            <div>cargando...</div>
+          <div class="w-1/6 px-2 mt-3 mb-3">
+            <div
+              class="h-32 flex items-center justify-center border border-gray-200 rounded">
+              <div>Cargando...</div>
+            </div>
           </div>
         }
       }

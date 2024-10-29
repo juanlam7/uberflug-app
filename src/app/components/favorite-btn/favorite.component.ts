@@ -22,21 +22,23 @@ import { StoreFavService } from 'src/app/services/storeFav.service';
   template: `
     <button
       (click)="isFavorite() ? deleteFavoriteBtn() : AddFavoriteBtn()"
-      [ngClass]="customClass()"
-      mat-fab
-      [color]="isFavorite() ? 'warn' : 'rgba(255,255,255,1)'"
+      class="flex items-center justify-center p-3 rounded-full transition duration-300 ease-in-out absolute top-4 right-4"
+      [ngStyle]="{
+        backgroundColor: isFavorite()
+          ? 'rgba(244, 63, 94, 1)'
+          : 'rgba(255, 255, 255, 1)',
+        color: isFavorite() ? 'white' : 'black',
+      }"
       aria-label="heart icon">
       <mat-icon>{{ isFavorite() ? 'favorite' : 'favorite_border' }}</mat-icon>
     </button>
   `,
-  styleUrls: ['./favorite.component.scss'],
   imports: [MatIcon, MatButtonModule, CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoriteComponent {
   detail = input<Character | null>();
   detailFav = input<IHeroResponse | null>();
-  customClass = input.required<string>();
   favoritesService = inject(FavoritesService);
   storeFavService = inject(StoreFavService);
 

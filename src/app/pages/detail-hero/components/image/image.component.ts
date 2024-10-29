@@ -6,16 +6,8 @@ import { Character } from 'src/app/models/characters';
   standalone: true,
   template: `
     <img
-      class="hero_img"
+      class="rounded-lg min-w-full max-h-[35em] object-cover"
       src="{{ detail().thumbnail.path }}.{{ detail().thumbnail.extension }}" />
-  `,
-  styles: `
-    .hero_img {
-      border-radius: 15px;
-      min-width: 100%;
-      max-height: 35em;
-      object-fit: cover;
-    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

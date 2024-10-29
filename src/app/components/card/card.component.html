@@ -1,19 +1,29 @@
 @if (item || itemFav) {
-  <div class="card">
+  <div class="relative text-black opacity-80 rounded-lg overflow-hidden">
     @if (item) {
-      <favorite-btn [detail]="item" customClass="fav-button--card" />
+      <favorite-btn [detail]="item" />
       <a [routerLink]="['/detail-hero', item.id]">
         <img
-        src="{{ item.thumbnail.path }}.{{ item.thumbnail.extension }}"
-        class="card_imgde" />
-        <h3 class="text_img">{{ item.name }}</h3>
+          src="{{ item.thumbnail.path }}.{{ item.thumbnail.extension }}"
+          class="w-full rounded-lg h-64 object-cover" />
+        <h3
+          class="absolute top-3/4 left-1/2 transform -translate-x-1/2 text-xl font-normal text-start text-black stroke-2">
+          {{ item.name }}
+        </h3>
       </a>
     } @else {
-      <favorite-btn [detailFav]="itemFav" customClass="fav-button--card" />
+      <favorite-btn [detailFav]="itemFav" />
       <a [routerLink]="['/detail-hero', itemFav?.heroId]">
-        <img src="{{ itemFav?.image }}" class="card_imgde" />
-        <h3 class="text_img">{{ itemFav?.name }}</h3>
+        <img
+          src="{{ itemFav?.image }}"
+          class="w-full rounded-lg h-64 object-cover" />
+        <h3
+          class="absolute top-3/4 left-1/2 transform -translate-x-1/2 text-xl font-normal text-start text-black stroke-2">
+          {{ itemFav?.name }}
+        </h3>
       </a>
     }
+    <div
+      class="absolute w-full h-1/4 bottom-0 bg-gradient-to-t from-white to-transparent"></div>
   </div>
 }

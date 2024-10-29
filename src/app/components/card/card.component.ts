@@ -10,7 +10,6 @@ import { FavoriteComponent } from '../favorite-btn/favorite.component';
   selector: 'card',
   standalone: true,
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
   imports: [CommonModule, RouterModule, FavoriteComponent],
 })
 export class CardComponent {

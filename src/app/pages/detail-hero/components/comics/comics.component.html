@@ -2,14 +2,14 @@
   <see-more [seeMore]="seeMore" />
 
   @if (seeMore()) {
-    <div appScrollNearEnd (nearEnd)="onNearEndScroll()" @fade>
+    <div appScrollNearEnd (nearEnd)="onNearEndScroll()" @fade class="py-4">
       <grid-list [AllComics]="AllComics" />
     </div>
   } @else {
-    <div @fade>
+    <div @fade class="py-4">
       <carousel [AllComics]="AllComics" />
     </div>
   }
 } @else {
-  <p>Cargando...</p>
+  <p class="text-center text-gray-500">Cargando...</p>
 }

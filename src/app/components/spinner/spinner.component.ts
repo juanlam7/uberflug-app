@@ -7,12 +7,11 @@ import { SpinnerService } from 'src/app/services/spinner.service';
   imports: [],
   template: ` @if (isLoading()) {
     <div
-      class="overlay position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
+      class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
       <div
-        class="spinner-border text-warning"
-        style="width: 8rem; height: 8rem;"
+        class="animate-spin h-32 w-32 border-8 border-t-8 border-t-yellow-500 border-gray-300 rounded-full"
         role="status">
-        <span class="visually-hidden">Loading...</span>
+        <span class="sr-only">Loading...</span>
       </div>
     </div>
   }`,

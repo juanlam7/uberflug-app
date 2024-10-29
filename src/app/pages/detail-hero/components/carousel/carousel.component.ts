@@ -14,22 +14,28 @@ import { ModalComponent } from '../modal/modal.component';
   standalone: true,
   template: `
     @if (AllComics(); as AllComics) {
-      <div class="row">
+      <div class="flex flex-wrap -mx-2 justify-between">
         @for (item of AllComics.slice(0, 10); track item.id) {
           @defer (on viewport) {
-            <div class="col d-inline-block overflow-hidden text-truncate p-0">
+            <div class="w-36 p-2">
+              <!-- Adjust width as needed -->
               <img
-                class="img-carousel"
+                class="w-full h-auto rounded cursor-pointer"
                 src="{{ item?.thumbnail?.path }}.{{
                   item?.thumbnail?.extension
                 }}"
                 alt="..."
                 (click)="openPopUp(item)" />
-              <p class="text-center">{{ item.title }}</p>
+              <p class="text-center mt-1 text-sm font-medium">
+                {{ item.title }}
+              </p>
             </div>
           } @placeholder {
-            <div class="col-2 mt-3 mb-3">
-              <div>cargando...</div>
+            <div class="w-36 p-2">
+              <div
+                class="h-32 flex items-center justify-center border border-gray-200 rounded">
+                <div>Cargando...</div>
+              </div>
             </div>
           }
         }

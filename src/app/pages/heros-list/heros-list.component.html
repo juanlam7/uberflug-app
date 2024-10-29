@@ -1,13 +1,21 @@
-<div class="container-fluid p-5" appScrollNearEnd (nearEnd)="onNearEndScroll()">
-  <div>
-    @if (allCharacters()) {
-      <div class="row">
-        <search-field [InputSearch]="InputFieldSearchValue" [Offset]="offset" [CharactersList]="allCharacters" />
+<div
+  class="container mx-auto p-5 pt-20"
+  appScrollNearEnd
+  (nearEnd)="onNearEndScroll()">
+  @if (allCharacters()) {
+    <div class="flex flex-col space-y-4">
+      <div class="flex justify-between">
+        <search-field
+          [InputSearch]="InputFieldSearchValue"
+          [Offset]="offset"
+          [CharactersList]="allCharacters" />
         <sort-button [charactersList]="allCharacters" />
-        <grid-list [charactersList]="allCharacters()" [InputSearch]="InputFieldSearchValue()" />
       </div>
-    } @else {
-      <p>Cargando...</p>
-    }
-  </div>
+      <grid-list
+        [charactersList]="allCharacters()"
+        [InputSearch]="InputFieldSearchValue()" />
+    </div>
+  } @else {
+    <p class="text-center">Cargando...</p>
+  }
 </div>

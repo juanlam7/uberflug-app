@@ -7,30 +7,18 @@ import { Character } from 'src/app/models/characters';
   selector: 'info-hero',
   standalone: true,
   template: `
-    <div class="card p-5 card_description">
-      <favorite-btn [detail]="detail()" customClass="fav-button--detail" />
-      <h1 class="text_img">{{ detail().name }}</h1>
+    <div class="relative bg-white p-5 rounded-lg shadow-md mt-12 -ml-24">
+      <favorite-btn [detail]="detail()" />
+      <h1 class="text-xl font-bold text-gray-800 mt-3">{{ detail().name }}</h1>
       <br />
-      <p class="text-start">
-        <span class="blue_text"
+      <p class="text-left">
+        <span class="text-blue-500 text-xs font-bold"
           >Update {{ formatDate(detail().modified) }}</span
         >
         <br />
         {{ detail().description }}
       </p>
     </div>
-  `,
-  styles: `
-    .card_description {
-      border-radius: 15px;
-      margin-top: 50px;
-      margin-left: -100px;
-    }
-    .blue_text {
-      color: #0090ef;
-      font-size: 12px;
-      font-weight: bold;
-    }
   `,
   imports: [FavoriteComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,

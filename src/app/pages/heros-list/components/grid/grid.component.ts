@@ -8,19 +8,19 @@ import { CharacterFilter } from '../../../../utils/pipes/characterFilter.pipe';
   selector: 'grid-list',
   standalone: true,
   template: `
-    <div class="row mt-3">
+    <div class="flex flex-wrap justify-between">
       @for (
         item of charactersList() ?? [] | CharacterFilter: InputSearch();
         track item.id
       ) {
         @defer (on viewport) {
-          <div class="col-2 mt-3 mb-3">
+          <div class="w-60 p-2 mt-3 mb-3">
             <card [item]="item"></card>
           </div>
         } @placeholder {
-          <div class="col-2 mt-3 mb-3">
-            <!-- add skeleton here while image hero is loading -->
-            <div>loading...</div>
+          <div class="w-60 p-2 mt-3 mb-3">
+            <!-- Add skeleton here while image hero is loading -->
+            <div class="text-center">loading...</div>
           </div>
         }
       }

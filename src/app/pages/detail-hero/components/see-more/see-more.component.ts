@@ -13,24 +13,23 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   template: `
     @if (seeMore(); as seeMore) {
-      <div class="row">
-        <div class="col" style="display: flex; justify-content: space-between">
-          <h1 style="margin: 0">COMICS</h1>
+      <div class="flex justify-between items-center p-4">
+        <h1 class="text-xl font-bold">COMICS</h1>
 
-          <button
-            mat-stroked-button
-            color="warn"
-            (click)="toggleSeeMoreButton()">
-            <mat-icon
-              [ngStyle]="{
-                transform: seeMore() ? 'rotate(-90deg)' : 'rotate(90deg)',
-                transition: 'transform 0.3s ease',
-              }"
-              >chevron_right</mat-icon
-            >
-            {{ seeMore() ? 'Ver menos' : 'Ver mas' }}
-          </button>
-        </div>
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="toggleSeeMoreButton()"
+          class="flex items-center border-2 border-red-500 text-red-500 rounded-lg px-4 py-2 transition-colors duration-300 hover:bg-red-500 hover:text-white">
+          <mat-icon
+            [ngStyle]="{
+              transform: seeMore() ? 'rotate(-90deg)' : 'rotate(90deg)',
+              transition: 'transform 0.3s ease',
+            }">
+            chevron_right
+          </mat-icon>
+          <span class="ml-2">{{ seeMore() ? 'Ver menos' : 'Ver mas' }}</span>
+        </button>
       </div>
     }
   `,
