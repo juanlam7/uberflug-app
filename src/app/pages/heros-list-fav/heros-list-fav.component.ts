@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CardComponent } from 'src/app/components/card/card.component';
-import { StoreFavService } from 'src/app/services/storeFav.service';
+import { CardComponent } from '@components/card/card.component';
+import { StoreFavService } from '@services/storeFav.service';
 
 @Component({
   selector: 'heros-fav-list',

@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Character } from 'src/app/models/characters';
+import { Character } from '@models/characters';
 
 @Component({
   selector: 'search-field',

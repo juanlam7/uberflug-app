@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { FavoriteComponent } from 'src/app/components/favorite-btn/favorite.component';
-import { Character } from 'src/app/models/characters';
+import { FavoriteComponent } from '@components/favorite-btn/favorite.component';
+import { Character } from '@models/characters';
 
 @Component({
   selector: 'info-hero',

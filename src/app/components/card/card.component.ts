@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
-import { Character } from 'src/app/models/characters';
-import { IHeroResponse } from 'src/app/services/favorites.service';
+import { Character } from '@models/characters';
+import { IHeroResponse } from '@services/favorites.service';
 import { FavoriteComponent } from '../favorite-btn/favorite.component';
 
 @Component({

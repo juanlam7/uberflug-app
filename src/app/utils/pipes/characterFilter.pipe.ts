@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Character } from 'src/app/models/characters';
+import { Character } from '@models/characters';
 
 @Pipe({ name: 'CharacterFilter', standalone: true })
 export class CharacterFilter implements PipeTransform {

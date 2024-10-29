@@ -8,9 +8,9 @@ import {
   signal,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CharactersService } from 'src/app/services/characters.service';
-import { Comic } from 'src/app/models/comics';
-import { ScrollNearEndDirective } from 'src/app/utils/directives/scroll-near-end.directive';
+import { CharactersService } from '@services/characters.service';
+import { Comic } from '@models/comics';
+import { ScrollNearEndDirective } from '@utils/directives/scroll-near-end.directive';
 import { GridComponent } from '../grid/grid.component';
 import { SeeMoreComponent } from '../see-more/see-more.component';
 import { CarouselComponent } from '../carousel/carousel.component';

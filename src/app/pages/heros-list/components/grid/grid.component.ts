@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { CardComponent } from 'src/app/components/card/card.component';
-import { Character } from 'src/app/models/characters';
+import { CardComponent } from '@components/card/card.component';
+import { Character } from '@models/characters';
 import { CharacterFilter } from '../../../../utils/pipes/characterFilter.pipe';
 
 @Component({

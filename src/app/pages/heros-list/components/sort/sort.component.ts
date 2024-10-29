@@ -6,8 +6,8 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
-import { Character } from 'src/app/models/characters';
-import { sortArrayByName, type orderArr } from 'src/app/utils/stringsMethods';
+import { Character } from '@models/characters';
+import { sortArrayByName, type orderArr } from '@utils/stringsMethods';
 
 @Component({
   selector: 'sort-button',

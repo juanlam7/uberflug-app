@@ -6,9 +6,9 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { CharactersService } from 'src/app/services/characters.service';
-import { Character } from 'src/app/models/characters';
-import { ScrollNearEndDirective } from 'src/app/utils/directives/scroll-near-end.directive';
+import { CharactersService } from '@services/characters.service';
+import { Character } from '@models/characters';
+import { ScrollNearEndDirective } from '@utils/directives/scroll-near-end.directive';
 import { GridComponent } from './components/grid/grid.component';
 import { SearchComponent } from './components/search/search.component';
 import { SortComponent } from './components/sort/sort.component';

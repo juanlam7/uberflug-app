@@ -9,12 +9,12 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { Character } from 'src/app/models/characters';
+import { Character } from '@models/characters';
 import {
   FavoritesService,
   IHeroResponse,
-} from 'src/app/services/favorites.service';
-import { StoreFavService } from 'src/app/services/storeFav.service';
+} from '@services/favorites.service';
+import { StoreFavService } from '@services/storeFav.service';
 
 @Component({
   selector: 'favorite-btn',
