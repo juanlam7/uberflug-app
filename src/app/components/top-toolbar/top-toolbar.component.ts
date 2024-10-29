@@ -20,7 +20,6 @@ import { AuthService } from '@services/auth.service';
 export class TopToolbarComponent {
   userData = {
     name: 'juan',
-    email: 'juan@test.com',
   };
 
   authService = inject(AuthService);

@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   isLoading = false;
 
   loginForm!: FormGroup;
-  emailControl!: FormControl;
+  userNameControl!: FormControl;
   passwordControl!: FormControl;
 
   constructor(
@@ -41,21 +41,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      userName: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
 
-    this.emailControl = this.loginForm.get('email') as FormControl;
+    this.userNameControl = this.loginForm.get('userName') as FormControl;
     this.passwordControl = this.loginForm.get('password') as FormControl;
   }
 
   async onLogin() {
-    const { email, password } = this.loginForm.value;
-    console.log('Email and password', email, password);
-
-    this.authService.login(email, password).subscribe(res => {
+    const { userName, password } = this.loginForm.value;
+    this.authService.login(userName, password).subscribe(res => {
       this.router.navigate(['/heros-list']);
-      console.log('Response', res);
     });
   }
 }

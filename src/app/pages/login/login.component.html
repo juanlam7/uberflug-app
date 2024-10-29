@@ -7,14 +7,14 @@
 
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <input-field
-          [control]="emailControl"
-          label="Correo electrónico"
-          placeholder="Enter your email address"
-          type="email"
+          [control]="userNameControl"
+          label="User name"
+          placeholder="Enter your user name"
+          type="text"
           [required]="true"
           prefixIcon="person"
-          errorMessage="Please provide a valid email address"
-          errorId="emailError" />
+          errorMessage="Please provide a valid user name"
+          errorId="userNameError" />
 
         <input-field
           [control]="passwordControl"
