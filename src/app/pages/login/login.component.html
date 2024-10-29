@@ -1,45 +1,40 @@
-<div class="container-fluid vh-100">
-  <div class="row justify-content-end">
-    <div class="col-6 align-self-center">
-      <div class="card p-5 m-5">
-        <div class="card-body mt-3 ps-5 pe-5 border_bottom">
-          <h5 class="text-center pb-3">Ingrese con correo</h5>
+<div
+  style="background-image: url('../../../assets/images/Image-2@2x.png')"
+  class="flex items-center justify-end h-screen bg-gray-100 bg-cover">
+  <div class="w-full max-w-md p-2">
+    <div class="bg-white p-10 rounded-lg shadow-md">
+      <h5 class="text-center text-lg font-semibold mb-5">Ingrese con correo</h5>
 
-          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-            <input-field
-              [control]="emailControl"
-              label="Correo electrónico"
-              placeholder="Enter your email address"
-              type="email"
-              [required]="true"
-              prefixIcon="person"
-              errorMessage="Please provide a valid email address"
-              errorId="emailError" />
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <input-field
+          [control]="emailControl"
+          label="Correo electrónico"
+          placeholder="Enter your email address"
+          type="email"
+          [required]="true"
+          prefixIcon="person"
+          errorMessage="Please provide a valid email address"
+          errorId="emailError" />
 
-            <input-field
-              [control]="passwordlControl"
-              label="Contraseña"
-              placeholder="Enter your password"
-              type="password"
-              [required]="true"
-              prefixIcon="lock"
-              errorMessage="Please provide a valid password"
-              errorId="passwordError" />
+        <input-field
+          [control]="passwordControl"
+          label="Contraseña"
+          placeholder="Enter your password"
+          type="password"
+          [required]="true"
+          prefixIcon="lock"
+          errorMessage="Please provide a valid password"
+          errorId="passwordError" />
 
-            <div
-              class="form-group mt-5 pt-2 col-12 d-flex justify-content-center">
-              <button
-                mat-raised-button
-                color="warn"
-                class="log_button"
-                type="submit"
-                [disabled]="loginForm.invalid || isLoading">
-                <span *ngIf="!isLoading">INGRESAR</span>
-              </button>
-            </div>
-          </form>
+        <div class="mt-5 pt-2 flex justify-center">
+          <button
+            type="submit"
+            class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+            [disabled]="loginForm.invalid || isLoading">
+            <span *ngIf="!isLoading">INGRESAR</span>
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

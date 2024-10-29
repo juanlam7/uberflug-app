@@ -10,7 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'top-toolbar',
   standalone: true,
   templateUrl: './top-toolbar.component.html',
-  styleUrls: ['./top-toolbar.component.scss'],
   imports: [MatDialogModule, RouterModule, MatIconModule, MatButtonModule]
 })
 export class TopToolbarComponent {
