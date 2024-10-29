@@ -1,5 +1,5 @@
+import { formatDate } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import moment from 'moment';
 import { FavoriteComponent } from 'src/app/components/favorite-btn/favorite.component';
 import { Character } from 'src/app/models/characters';
 
@@ -27,6 +27,6 @@ export class InfoHeroComponent {
   detail = input.required<Character>();
 
   formatDate(date: string) {
-    return moment(date).format('LL');
+    return formatDate(date, 'longDate', 'en-US');
   }
 }
