@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
   selector: 'input-field',
   standalone: true,
   template: `
-    <mat-form-field class="w-100" appearance="fill">
+    <mat-form-field class="w-full" appearance="fill">
       <mat-label>{{ label() }}</mat-label>
       <mat-icon matPrefix class="ms-2 me-3">{{ prefixIcon() }}</mat-icon>
       <input
@@ -22,22 +22,24 @@ import { MatInputModule } from '@angular/material/input';
         [required]="required()"
         [attr.aria-describedby]="errorId()" />
 
-      @if (type() === 'password') {
-        <button
-          mat-icon-button
-          matSuffix
-          type="button"
-          (click)="hidePassword = !hidePassword"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hidePassword">
-          <mat-icon>{{
-            hidePassword ? 'visibility_off' : 'visibility'
-          }}</mat-icon>
-        </button>
-      }
-      <mat-icon matSuffix class="ms-2 me-3" *ngIf="control()?.value">
-        {{ control().valid ? 'check' : 'close' }}
-      </mat-icon>
+      <span matSuffix>
+        @if (type() === 'password') {
+          <button
+            mat-icon-button
+            type="button"
+            (click)="hidePassword = !hidePassword"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{
+              hidePassword ? 'visibility_off' : 'visibility'
+            }}</mat-icon>
+          </button>
+        }
+        <mat-icon class="ms-2 me-3" *ngIf="control()?.value">
+          {{ control().valid ? 'check' : 'close' }}
+        </mat-icon>
+      </span>
+
       <mat-error
         [id]="errorId()"
         aria-live="assertive"

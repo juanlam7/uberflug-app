@@ -18,7 +18,6 @@ import { InputFieldComponent } from './components/input.component';
   selector: 'login',
   standalone: true,
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
   imports: [
     CommonModule,
     MatInputModule,
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
   emailControl!: FormControl;
-  passwordlControl!: FormControl;
+  passwordControl!: FormControl;
 
   constructor(
     private authService: AuthService,
@@ -47,7 +46,7 @@ export class LoginComponent implements OnInit {
     });
 
     this.emailControl = this.loginForm.get('email') as FormControl;
-    this.passwordlControl = this.loginForm.get('password') as FormControl;
+    this.passwordControl = this.loginForm.get('password') as FormControl;
   }
 
   async onLogin() {
