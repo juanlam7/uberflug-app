@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 const getAllFavoriteSchema = gql`
   query AllFavoritesByUser {
@@ -30,6 +31,11 @@ interface IGetFavorite {
 })
 export class FavoritesService {
   private readonly apollo = inject(Apollo);
+
+  favorite$ = this.getFavorite();
+  favorite = toSignal(this.favorite$, {
+    initialValue: [],
+  });
 
   getFavorite(): Observable<IHeroResponse[]> {
     return this.apollo

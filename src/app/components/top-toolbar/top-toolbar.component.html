@@ -1,20 +1,23 @@
-<nav class="bg-white absolute w-full flex justify-between items-center mt-1 p-2">
+<nav
+  class="bg-white absolute w-full flex justify-between items-center mt-1 p-2">
   <div class="ml-5">
     <a [routerLink]="['']">
       <img id="head" src="../../../assets/images/Subtraction.svg" alt="Logo" />
     </a>
   </div>
-  <div class="flex items-center">
-    <div class="mx-2">
-      <button
-        class="bg-red-500 text-white font-bold flex items-center py-2 px-4 rounded"
-        (click)="openPopUp()">
-        <mat-icon class="mr-2">menu</mat-icon>
-        Menu
-      </button>
+  @if (authService.isAuthenticated()) {
+    <div class="flex items-center">
+      <div class="mx-2">
+        <button
+          class="bg-red-500 text-white font-bold flex items-center py-2 px-4 rounded"
+          (click)="openPopUp()">
+          <mat-icon class="mr-2">menu</mat-icon>
+          Menu
+        </button>
+      </div>
+      <div class="mx-2">
+        <p class="text-red-500 cursor-pointer mb-0">{{ userData.name }}</p>
+      </div>
     </div>
-    <div class="mx-2">
-      <p class="text-red-500 cursor-pointer mb-0">{{ userData.email }}</p>
-    </div>
-  </div>
+  }
 </nav>

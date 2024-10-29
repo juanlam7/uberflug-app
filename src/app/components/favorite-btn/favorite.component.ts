@@ -14,7 +14,6 @@ import {
   FavoritesService,
   IHeroResponse,
 } from '@services/favorites.service';
-import { StoreFavService } from '@services/storeFav.service';
 
 @Component({
   selector: 'favorite-btn',
@@ -40,7 +39,6 @@ export class FavoriteComponent {
   detail = input<Character | null>();
   detailFav = input<IHeroResponse | null>();
   favoritesService = inject(FavoritesService);
-  storeFavService = inject(StoreFavService);
 
   isFavorite = signal<boolean>(false);
 
@@ -48,7 +46,7 @@ export class FavoriteComponent {
     effect(
       () => {
         this.isFavorite.set(
-          this.storeFavService
+          this.favoritesService
             .favorite()
             .some(
               item =>
