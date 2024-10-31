@@ -1,11 +1,6 @@
 export const environment = {
   production: true,
-  firebaseConfig : {
-    apiKey: "AIzaSyCIOynPTmpeNOSZ9fN3pAFuRiy-diaGzAk",
-    authDomain: "uberflug-app.firebaseapp.com",
-    projectId: "uberflug-app",
-    storageBucket: "uberflug-app.appspot.com",
-    messagingSenderId: "917496141059",
-    appId: "1:917496141059:web:bc6db8e61cbbfd83468536"
-  }
+  graphqlApi: import.meta.env.NG_APP_GRAPHQL_API,
+  marvelApi: import.meta.env.NG_APP_MARVEL_API,
+  marvelApiKey: import.meta.env.NG_APP_MARVEL_API_KEY,
 };

@@ -19,7 +19,7 @@ import { AuthService } from '@services/auth.service';
 })
 export class TopToolbarComponent {
   userData = {
-    name: 'juan',
+    name: 'User',
   };
 
   authService = inject(AuthService);

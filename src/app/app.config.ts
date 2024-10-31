@@ -13,6 +13,7 @@ import {
 } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { InMemoryCache } from '@apollo/client/core';
+import { environment } from '@envs/environment';
 import { HttpLink } from 'apollo-angular/http';
 import { routes } from './app.routes';
 import { authLink } from './utils/interceptors/auth-link';
@@ -33,7 +34,7 @@ export const appConfig: ApplicationConfig = {
 
       return {
         link: authLink.concat(
-          httpLink.create({ uri: 'http://localhost:4300/api' })
+          httpLink.create({ uri: environment.graphqlApi })
         ),
         cache: new InMemoryCache(),
       };

@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '@envs/environment';
 import { debounceTime, map, Observable, retry } from 'rxjs';
 import {
   allCharactersResponse,
@@ -8,9 +9,8 @@ import {
 } from '../models/characters';
 import { allComicResponse, DataResponseComic } from '../models/comics';
 
-const BASE_API = 'https://gateway.marvel.com/v1/public/characters';
-const API_KEY =
-  'e5dc9090bc2546ae10b3abe84382751c&hash=05a1400f79b7e0a15a8ea3d74e8d1f1a';
+const BASE_API = environment.marvelApi;
+const API_KEY = environment.marvelApiKey;
 
 @Injectable({
   providedIn: 'root',
