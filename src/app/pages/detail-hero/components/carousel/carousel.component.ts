@@ -11,7 +11,6 @@ import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'carousel',
-  standalone: true,
   template: `
     @if (AllComics(); as AllComics) {
       <div class="flex flex-wrap -mx-2 justify-between">

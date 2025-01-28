@@ -3,7 +3,6 @@ import { debounceTime, Subject } from 'rxjs';
 
 @Directive({
   selector: '[appScrollNearEnd]',
-  standalone: true,
 })
 export class ScrollNearEndDirective {
   @Output() nearEnd: EventEmitter<void> = new EventEmitter();

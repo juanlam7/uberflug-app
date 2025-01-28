@@ -1,4 +1,4 @@
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,8 +6,9 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { CharactersService } from '@services/characters.service';
 import { Character } from '@models/characters';
+import { CharactersService } from '@services/characters.service';
+import { SpinnerService } from '@services/spinner.service';
 import { ScrollNearEndDirective } from '@utils/directives/scroll-near-end.directive';
 import { GridComponent } from './components/grid/grid.component';
 import { SearchComponent } from './components/search/search.component';
@@ -15,12 +16,10 @@ import { SortComponent } from './components/sort/sort.component';
 
 @Component({
   selector: 'heros-list',
-  standalone: true,
   templateUrl: './heros-list.component.html',
   imports: [
     CommonModule,
     ScrollNearEndDirective,
-    JsonPipe,
     SearchComponent,
     SortComponent,
     GridComponent,
@@ -29,6 +28,7 @@ import { SortComponent } from './components/sort/sort.component';
 })
 export class HerosListComponent {
   charactersService = inject(CharactersService);
+  spinnerService = inject(SpinnerService);
 
   allCharacters = signal<Character[] | null>(null);
 
@@ -39,25 +39,22 @@ export class HerosListComponent {
   InputFieldSearchValue = signal<string>('');
 
   constructor() {
-    effect(
-      cleanUp => {
-        const subscription = this.charactersService
-          .getAllCharacters(
-            this.limit(),
-            this.offset(),
-            this.InputFieldSearchValue()
-          )
-          .subscribe(p => {
-            this.total.set(p.total);
-            this.allCharacters.update(val =>
-              val ? [...val, ...p.results] : p.results
-            );
-          });
+    effect(cleanUp => {
+      const subscription = this.charactersService
+        .getAllCharacters(
+          this.limit(),
+          this.offset(),
+          this.InputFieldSearchValue()
+        )
+        .subscribe(p => {
+          this.total.set(p.total);
+          this.allCharacters.update(val =>
+            val ? [...val, ...p.results] : p.results
+          );
+        });
 
-        cleanUp(() => subscription.unsubscribe());
-      },
-      { allowSignalWrites: true }
-    );
+      cleanUp(() => subscription.unsubscribe());
+    });
   }
 
   onNearEndScroll(): void {

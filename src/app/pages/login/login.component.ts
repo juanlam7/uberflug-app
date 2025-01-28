@@ -16,7 +16,6 @@ import { InputFieldComponent } from './components/input.component';
 
 @Component({
   selector: 'login',
-  standalone: true,
   templateUrl: './login.component.html',
   imports: [
     CommonModule,

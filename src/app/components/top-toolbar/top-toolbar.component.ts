@@ -13,7 +13,6 @@ import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'top-toolbar',
-  standalone: true,
   templateUrl: './top-toolbar.component.html',
   imports: [MatDialogModule, RouterModule, MatIconModule, MatButtonModule],
 })

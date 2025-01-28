@@ -9,7 +9,6 @@ import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'menu-modal',
-  standalone: true,
   templateUrl: './menu-modal.component.html',
   imports: [
     MatIconModule,

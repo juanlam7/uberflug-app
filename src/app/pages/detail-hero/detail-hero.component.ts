@@ -15,7 +15,6 @@ import { InfoHeroComponent } from './components/info/info.component';
 
 @Component({
   selector: 'detail-hero',
-  standalone: true,
   templateUrl: './detail-hero.component.html',
   imports: [
     CommonModule,
@@ -43,7 +42,6 @@ export class DetailHeroComponent {
           subscription.unsubscribe();
         });
       },
-      { allowSignalWrites: true }
     );
   }
 }

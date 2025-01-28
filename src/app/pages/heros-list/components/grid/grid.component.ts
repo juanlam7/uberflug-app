@@ -6,7 +6,6 @@ import { CharacterFilter } from '../../../../utils/pipes/characterFilter.pipe';
 
 @Component({
   selector: 'grid-list',
-  standalone: true,
   template: `
     <div class="flex flex-wrap justify-between">
       @for (

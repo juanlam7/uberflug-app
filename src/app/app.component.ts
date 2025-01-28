@@ -5,7 +5,6 @@ import SpinnerComponent from '@components/spinner/spinner.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   template: `
     <top-toolbar />
     <router-outlet />

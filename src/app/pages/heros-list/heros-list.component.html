@@ -1,7 +1,7 @@
 <div
   class="container mx-auto p-5 pt-20"
   appScrollNearEnd
-  (nearEnd)="onNearEndScroll()">
+  (nearEnd)="spinnerService.isLoading() ? '' : onNearEndScroll()">
   @if (allCharacters()) {
     <div class="flex flex-col space-y-4">
       <div class="flex justify-between">

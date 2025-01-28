@@ -5,7 +5,6 @@ import { Character } from '@models/characters';
 
 @Component({
   selector: 'info-hero',
-  standalone: true,
   template: `
     <div class="relative bg-white p-5 rounded-lg shadow-md mt-12 -ml-24">
       <favorite-btn [detail]="detail()" />

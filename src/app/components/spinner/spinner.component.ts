@@ -3,7 +3,6 @@ import { SpinnerService } from '@services/spinner.service';
 
 @Component({
   selector: 'spinner',
-  standalone: true,
   imports: [],
   template: ` @if (isLoading()) {
     <div

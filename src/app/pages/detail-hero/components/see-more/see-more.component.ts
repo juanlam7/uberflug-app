@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'see-more',
-  standalone: true,
   template: `
     @if (seeMore(); as seeMore) {
       <div class="flex justify-between items-center p-4">

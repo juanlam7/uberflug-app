@@ -5,7 +5,6 @@ import { FavoritesService } from '@services/favorites.service';
 
 @Component({
   selector: 'heros-fav-list',
-  standalone: true,
   template: `
     <div class="container mx-auto p-5 pt-20">
       @if (favoritesService.favorite(); as favorite) {

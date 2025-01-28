@@ -4,7 +4,6 @@ import { Comic } from '@models/comics';
 
 @Component({
   selector: 'grid-list',
-  standalone: true,
   template: `
     <div class="flex flex-wrap -mx-2">
       @for (item of AllComics(); track item.id) {

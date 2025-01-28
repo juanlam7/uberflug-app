@@ -8,7 +8,6 @@ import { FavoriteComponent } from '../favorite-btn/favorite.component';
 
 @Component({
   selector: 'card',
-  standalone: true,
   templateUrl: './card.component.html',
   imports: [CommonModule, RouterModule, FavoriteComponent],
 })

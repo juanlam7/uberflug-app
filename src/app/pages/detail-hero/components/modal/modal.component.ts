@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'modal',
-  standalone: true,
   template: `
     <div class="p-5">
       <mat-icon

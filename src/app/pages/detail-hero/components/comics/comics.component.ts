@@ -8,16 +8,16 @@ import {
   signal,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CharactersService } from '@services/characters.service';
 import { Comic } from '@models/comics';
+import { CharactersService } from '@services/characters.service';
+import { SpinnerService } from '@services/spinner.service';
 import { ScrollNearEndDirective } from '@utils/directives/scroll-near-end.directive';
+import { CarouselComponent } from '../carousel/carousel.component';
 import { GridComponent } from '../grid/grid.component';
 import { SeeMoreComponent } from '../see-more/see-more.component';
-import { CarouselComponent } from '../carousel/carousel.component';
 
 @Component({
   selector: 'comics',
-  standalone: true,
   templateUrl: './comics.component.html',
   imports: [
     CommonModule,
@@ -41,6 +41,8 @@ export class ComicsComponent {
   AllComics = signal<Comic[] | null>(null);
 
   charactersService = inject(CharactersService);
+  spinnerService = inject(SpinnerService);
+
   router = inject(ActivatedRoute);
 
   seeMore = signal<boolean>(false);
@@ -51,23 +53,20 @@ export class ComicsComponent {
 
   constructor() {
     const id = this.router.snapshot.paramMap.get('id');
-    effect(
-      cleanUp => {
-        if (id) {
-          const subscription = this.charactersService
-            .getComicsByCharacter(parseInt(id), this.limit(), this.offset())
-            .subscribe(p => {
-              this.total.set(p.total);
-              this.AllComics.update(val =>
-                val ? [...val, ...p.results] : p.results
-              );
-            });
+    effect(cleanUp => {
+      if (id) {
+        const subscription = this.charactersService
+          .getComicsByCharacter(parseInt(id), this.limit(), this.offset())
+          .subscribe(p => {
+            this.total.set(p.total);
+            this.AllComics.update(val =>
+              val ? [...val, ...p.results] : p.results
+            );
+          });
 
-          cleanUp(() => subscription.unsubscribe());
-        }
-      },
-      { allowSignalWrites: true }
-    );
+        cleanUp(() => subscription.unsubscribe());
+      }
+    });
   }
 
   onNearEndScroll(): void {

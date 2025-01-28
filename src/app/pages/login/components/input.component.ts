@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'input-field',
-  standalone: true,
   template: `
     <mat-form-field class="w-full" appearance="fill">
       <mat-label>{{ label() }}</mat-label>

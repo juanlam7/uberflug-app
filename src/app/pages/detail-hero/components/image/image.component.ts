@@ -3,7 +3,6 @@ import { Character } from '@models/characters';
 
 @Component({
   selector: 'image-hero',
-  standalone: true,
   template: `
     <img
       class="rounded-lg min-w-full max-h-[35em] object-cover"

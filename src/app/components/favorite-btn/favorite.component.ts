@@ -17,7 +17,6 @@ import {
 
 @Component({
   selector: 'favorite-btn',
-  standalone: true,
   template: `
     <button
       (click)="isFavorite() ? deleteFavoriteBtn() : AddFavoriteBtn()"
@@ -55,7 +54,6 @@ export class FavoriteComponent {
             )
         );
       },
-      { allowSignalWrites: true }
     );
   }
 
