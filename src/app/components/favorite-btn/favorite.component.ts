@@ -2,18 +2,14 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
+  computed,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Character } from '@models/characters';
-import {
-  FavoritesService,
-  IHeroResponse,
-} from '@services/favorites.service';
+import { FavoritesService, IHeroResponse } from '@services/favorites.service';
 
 @Component({
   selector: 'favorite-btn',
@@ -39,23 +35,15 @@ export class FavoriteComponent {
   detailFav = input<IHeroResponse | null>();
   favoritesService = inject(FavoritesService);
 
-  isFavorite = signal<boolean>(false);
-
-  constructor() {
-    effect(
-      () => {
-        this.isFavorite.set(
-          this.favoritesService
-            .favorite()
-            .some(
-              item =>
-                item.heroId === this.detail()?.id ||
-                item.heroId === this.detailFav()?.heroId
-            )
-        );
-      },
-    );
-  }
+  isFavorite = computed(() => {
+    return this.favoritesService
+      .favorite()
+      .some(
+        item =>
+          item.heroId === this.detail()?.id ||
+          item.heroId === this.detailFav()?.heroId
+      );
+  });
 
   AddFavoriteBtn() {
     const favoriteId = this.detail()?.id ?? this.detailFav()!.heroId;
