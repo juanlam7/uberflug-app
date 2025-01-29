@@ -1,7 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Apollo, gql } from 'apollo-angular';
-import { tap } from 'rxjs';
+import { map, tap } from 'rxjs';
+
+const getInitCall = gql`
+  query Query {
+    initCall
+  }
+`;
+
+interface IGetInitCall {
+  initCall: string;
+}
 
 interface ILogin {
   value: string;
@@ -129,5 +139,14 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.refreshTokenKey);
     this.router.navigate(['/login']);
+  }
+
+  // Development approach, wait a moment the backend server must be turned on.
+  initCall() {
+    return this.apollo
+      .watchQuery<IGetInitCall>({
+        query: getInitCall,
+      })
+      .valueChanges.pipe(map(res => res.data.initCall));
   }
 }
